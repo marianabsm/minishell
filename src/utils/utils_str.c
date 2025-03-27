@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:50:45 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 13:14:05 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:11:04 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 	char	*s01;
 	char	*s02;
 
-	if (!s1 && !s2)
-		return (0); // Both strings are NULL, considered equal
+	if (!s1 || !s2)
+		return (-1); // Both strings are NULL, considered equal
 	s01 = (char *)s1;
 	s02 = (char *)s2;
 	while (*s01 && *s02)

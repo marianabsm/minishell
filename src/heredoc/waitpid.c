@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   waitpid.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:22:09 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 13:38:54 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:22:26 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	write_to_pipe(char *str, t_exec *exec)
 	char	*s1;
 
 	s1 = ft_strjoin(str, "\n");
-	write(exec->pipe_fd[1], &s1, ft_strlen(str));
+	write(exec->pipe_fd[1], s1, ft_strlen(str));
 	free(s1);
 }

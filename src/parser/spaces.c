@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "../includes/minishell.h"
 
 int is_special_char(char c) 
 {
@@ -53,6 +54,9 @@ size_t calculate_size(const char *input)
 
 void handle_special_char(const char *input, char *output, int *i, int *j) 
 {
+    int aspas;
+
+    aspas =  0;
     if ((input[*i] == '<' && input[*i + 1] == '<') || (input[*i] == '>' && input[*i + 1] == '>')) 
     {
         if (*j > 0 && output[*j - 1] != ' ')
@@ -102,14 +106,14 @@ char* add_spaces(const char *input)
 
 /////////////////////////////////////////// ver com johny se esta parte esta bem / faz sentido ///////////////////////////////////////////////
 
-int ft_isspace(int k)
+int ft_isspace2(int k)
 {
     if(k == ' ')
         return(1);
     return(0);
 }
 
-int count_words(const char *str)
+int count_words2(const char *str)
 {
     int count;
     int in_word;
@@ -117,12 +121,12 @@ int count_words(const char *str)
     count = 0;
     in_word = 0;
     while (*str) {
-        if (!ft_isspace(*str) && !in_word)
+        if (!ft_isspace2(*str) && !in_word)
         {
             in_word = 1;
             count++;
         }
-        else if (ft_isspace(*str))
+        else if (ft_isspace2(*str))
             in_word = 0;
         str++;
     }
@@ -151,7 +155,7 @@ char **split_by_spaces(const char *input) // 29 lines !!!
 
     if (!input) 
         return NULL;
-    word_count = count_words(input);
+    word_count = count_words2(input);
     matrix = (char **)malloc((word_count + 1) * sizeof(char *));
     if (!matrix)
         return NULL;
@@ -174,26 +178,46 @@ char **split_by_spaces(const char *input) // 29 lines !!!
     return (matrix);
 }
 
-int main(void)
-{
-    const char *test_input;
-    char **result;
-    int i;
+// int main(void)
+// {
+//     const char *test_input;
+//     char **result;
+//     int i;
 
     
-    test_input = "This is a test string for split_by_spaces.";
-    result = split_by_spaces(test_input);
-    if (!result) 
+//     test_input = "This is a test string for split_by_spaces.";
+//     result = split_by_spaces(test_input);
+//     if (!result) 
+//     {
+//         printf("Error: split_by_spaces returned NULL.\n");
+//         return (1);
+//     }
+//     printf("Words in the input string:\n");
+//     for (i = 0; result[i] != NULL; i++) 
+//     {
+//         printf("Word %d: %s\n", i + 1, result[i]);
+//         free(result[i]);
+//     }
+//     free(result);
+//     return (0);
+// }
+
+char *func(char *str)
+{
+    int aspas;
+    int i = 0;
+
+    i = 0;
+    aspas = 0;
+    while(str && str[i] != '\0')
     {
-        printf("Error: split_by_spaces returned NULL.\n");
-        return (1);
+        if(str[i] == '"')
+        {
+            aspas = 1;
+            while(str && str[i] != '\0' && str[i] != '"')
+                i++;
+        }
+        aspas = 0;
+        i++;
     }
-    printf("Words in the input string:\n");
-    for (i = 0; result[i] != NULL; i++) 
-    {
-        printf("Word %d: %s\n", i + 1, result[i]);
-        free(result[i]);
-    }
-    free(result);
-    return (0);
 }

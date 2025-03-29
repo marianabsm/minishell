@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/28 19:19:17 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:30:18 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSER_H
 
 # include "../includes/minishell.h"
+
+char* add_spaces(const char *input);
 
 /* create_token.c */
 int		get_type(char *str);

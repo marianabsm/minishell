@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/28 17:17:58 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:31:26 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,15 @@ void print_msh(t_msh *msh)
 
 int	parser(void)
 {
+    char    *new_line;
 	//if (!check_quotes(msh()->line))
     //{
     //    //manda um error ?!TODO
 	//	return (0);
     //}
+    printf("%s\n", msh()->line);
+    new_line = add_spaces(msh()->line);
+    printf("%s\n", new_line);
 	if (!tokenizer())
         return (0);
     //print_struct(&msh()->tokens);

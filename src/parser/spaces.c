@@ -9,41 +9,58 @@
 /*   Updated: 2025/03/28 18:51:57 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include "../includes/minishell.h"
 
 int is_special_char(char c) 
 {
-    return c == '<' || c == '>' || c == '|';
+    return (c == '<' || c == '>' || c == '|');
+}
+void handle_quoted_string(const char *input, char *output, int *i, int *j) 
+{
+    output[(*j)++] = input[(*i)++];
+    while (input[*i] != '\0' && input[*i] != '"')
+        output[(*j)++] = input[(*i)++];
+    if (input[*i] == '"')
+        output[(*j)++] = input[(*i)++];
+}
+
+void handle_special_char(const char *input, char *output, int *i, int *j) 
+{
+    if (*j > 0 && output[*j - 1] != ' ')
+        output[(*j)++] = ' ';
+    output[(*j)++] = input[(*i)++];
+    if ((input[*i - 1] == '<' && input[*i] == '<') || (input[*i - 1] == '>' && input[*i] == '>'))
+        output[(*j)++] = input[(*i)++];
+    if (input[*i] != ' ' && input[*i] != '\0') 
+        output[(*j)++] = ' ';
 }
 
 size_t calculate_size(const char *input) 
 {
     size_t extra;
     int i;
-    
+
     extra = 0;
     i = 0;
     while (input[i] != '\0') 
     {
         if (is_special_char(input[i])) 
         {
-            if ((input[i] == '<' && input[i+1] == '<') || (input[i] == '>' && input[i+1] == '>')) 
+            if ((input[i] == '<' && input[i + 1] == '<') || (input[i] == '>' && input[i + 1] == '>')) 
             {
                 i++;
-                if (i == 1 || input[i-2] != ' ')
+                if (i == 1 || input[i - 2] != ' ')
                     extra++;
-                if (input[i+1] != ' ')
+                if (input[i + 1] != ' ')
                     extra++;
             } 
             else 
             {
-                if (i == 0 || input[i-1] != ' ') 
+                if (i == 0 || input[i - 1] != ' ') 
                     extra++;
-                if (input[i+1] != ' ') 
+                if (input[i + 1] != ' ') 
                     extra++;
             }
         }
@@ -52,59 +69,43 @@ size_t calculate_size(const char *input)
     return (strlen(input) + extra + 1);
 }
 
-void handle_special_char(const char *input, char *output, int *i, int *j) 
-{
-    int aspas;
-
-    aspas =  0;
-    if ((input[*i] == '<' && input[*i + 1] == '<') || (input[*i] == '>' && input[*i + 1] == '>')) 
-    {
-        if (*j > 0 && output[*j - 1] != ' ')
-            output[(*j)++] = ' ';
-        output[(*j)++] = input[(*i)++];
-        output[(*j)++] = input[*i];
-        if (input[*i + 1] != ' ' && input[*i + 1] != '\0')
-            output[(*j)++] = ' ';
-    } 
-    else if (is_special_char(input[*i]))
-    {
-        if (*j > 0 && output[*j - 1] != ' ')
-            output[(*j)++] = ' ';
-        output[(*j)++] = input[*i];
-        if (input[*i + 1] != ' ' && input[*i + 1] != '\0')
-            output[(*j)++] = ' ';
-    } 
-    else
-        output[(*j)++] = input[*i];
-}
-
 char* add_spaces(const char *input) 
 {
-    size_t required_size = calculate_size(input);
-    char *output = (char*)malloc(required_size * sizeof(char));
-    if (output == NULL) return NULL;
+    char *output;
+    int i;
+    int j;
+    
+    i = 0;
+    j = 0;
+    output = (char*)malloc(calculate_size(input) * sizeof(char));
+    if (output == NULL) 
+        return (NULL);
 
-    int i = 0;
-    int j = 0;
-    while (input[i] != '\0') {
-        handle_special_char(input, output, &i, &j);
-        i++;
+    while (input[i] != '\0') 
+    {
+        if (input[i] == '"') 
+            handle_quoted_string(input, output, &i, &j);
+        else if (is_special_char(input[i]))
+            handle_special_char(input, output, &i, &j);
+        else
+            output[j++] = input[i++];
     }
     output[j] = '\0';
-    return output;
+    return (output);
 }
+
+
 
 // int main() 
 // {
-//     const char *input = "a<b|    c>>d <<e>f";
+//     const char *input = "a<b|    \"c>>d\" <<e>f";
 //     char *output = add_spaces(input);
 //     printf("Output: %s\n", output);
 //     free(output);
 //     return 0;
 // }
 
-
-/////////////////////////////////////////// ver com johny se esta parte esta bem / faz sentido ///////////////////////////////////////////////
+/////////////////////////////////////////// segunda parte ///////////////////////////////////////////
 
 int ft_isspace2(int k)
 {
@@ -145,79 +146,74 @@ char *substr(const char *str, int start, int len)
     return (sub);
 }
 
-char **split_by_spaces(const char *input) // 29 lines !!!
+static char *extract_next_token(const char *input, int *i) 
+{
+    int start;
+    char *token;
+
+    if (input[*i] == '"') 
+    {
+        start = ++(*i);
+        while (input[*i] && input[*i] != '"') 
+            (*i)++;
+        token = substr(input, start, *i - start);
+        if (input[*i] == '"') 
+            (*i)++;
+        return (token);
+    }
+    start = *i;
+    while (input[*i] && !ft_isspace2(input[*i]) && input[*i] != '"') 
+        (*i)++;
+    return (substr(input, start, *i - start));
+}
+
+char **split_by_spaces(const char *input) 
 {
     int word_count;
     char **matrix;
     int i;
     int k;
-    int start;
 
+    i = 0;
+    k = 0;
     if (!input) 
         return NULL;
     word_count = count_words2(input);
     matrix = (char **)malloc((word_count + 1) * sizeof(char *));
     if (!matrix)
         return NULL;
-    i = 0;
-    k = 0;
-    start = 0;
     while (input[i]) 
     {
-        if (!ft_isspace(input[i])) 
-        {
-            start = i;
-            while (input[i] && !ft_isspace(input[i])) 
-                i++;
-            matrix[k++] = substr(input, start, i - start);
-        } 
-        else 
+        if (!ft_isspace2(input[i]))
+            matrix[k++] = extract_next_token(input, &i);
+        else
             i++;
     }
     matrix[k] = NULL;
     return (matrix);
 }
 
-// int main(void)
-// {
-//     const char *test_input;
-//     char **result;
-//     int i;
+int main(void)
+{
+    const char *test_input;
+    char **result;
+    int i;
 
     
-//     test_input = "This is a test string for split_by_spaces.";
-//     result = split_by_spaces(test_input);
-//     if (!result) 
-//     {
-//         printf("Error: split_by_spaces returned NULL.\n");
-//         return (1);
-//     }
-//     printf("Words in the input string:\n");
-//     for (i = 0; result[i] != NULL; i++) 
-//     {
-//         printf("Word %d: %s\n", i + 1, result[i]);
-//         free(result[i]);
-//     }
-//     free(result);
-//     return (0);
-// }
-
-char *func(char *str)
-{
-    int aspas;
-    int i = 0;
-
-    i = 0;
-    aspas = 0;
-    while(str && str[i] != '\0')
+    test_input = "This is a \"test string\" for split_by_spaces.";
+    result = split_by_spaces(test_input);
+    if (!result) 
     {
-        if(str[i] == '"')
-        {
-            aspas = 1;
-            while(str && str[i] != '\0' && str[i] != '"')
-                i++;
-        }
-        aspas = 0;
-        i++;
+        printf("Error: split_by_spaces returned NULL.\n");
+        return (1);
     }
+    printf("Words in the input string:\n");
+    for (i = 0; result[i] != NULL; i++) 
+    {
+        printf("Word %d: %s\n", i + 1, result[i]);
+        free(result[i]);
+    }
+    free(result);
+    return (0);
 }
+

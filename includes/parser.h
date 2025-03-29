@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 00:57:22 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/28 19:19:17 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_env	*get_env(char **envp);
 /* envp_2.c */
 char	**get_default_env(void);
 t_env	*empty_env(void);
-t_env	*env_dup(t_env *env);
+t_env	*_dup(t_env *env);
 
 /* init_exec.c */
 int     count_cmds(t_token *tokens);

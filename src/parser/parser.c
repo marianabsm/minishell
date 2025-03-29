@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 16:51:32 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:17:58 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,22 @@ void print_msh(t_msh *msh)
 
 int	parser(void)
 {
-	if (!check_quotes(msh()->line))
-		return (0);
+	//if (!check_quotes(msh()->line))
+    //{
+    //    //manda um error ?!TODO
+	//	return (0);
+    //}
 	if (!tokenizer())
         return (0);
-    print_struct(&msh()->tokens);
-	expander(msh()->tokens);
-    printf("passed\n");
-    if (!check_syntax(msh()->tokens))
-        return (0);
-    if (!set_exec())
-        return (0);
-    //até aqui tokens tá top
-    rm_quotes_exec();
-    print_exec(msh()->exec);
+    //print_struct(&msh()->tokens);
+	//expander(msh()->tokens);
+    //printf("passed\n");
+    //if (!check_syntax(msh()->tokens))
+    //    return (0);
+    //if (!set_exec())
+    //    return (0);
+    ////até aqui tokens tá top
+    //rm_quotes_exec();
+    //print_exec(msh()->exec);
     return (1);
 }

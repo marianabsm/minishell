@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:16:49 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 13:04:15 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:37:52 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sigint_handler(int sig)
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 	msh()->exit_status = 130;
 }

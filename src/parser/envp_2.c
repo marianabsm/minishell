@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 01:33:41 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/19 15:31:41 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/03/28 19:23:32 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ char	**get_default_env(void)
 		exit(1);
 	}
 	default_env = safe_malloc(sizeof(char *) * 6);
-	default_env[0] = ft_strjoin("PWD=", cwd);
+	default_env[0] = ft_strjoin("PWD=", cwd); //tirar
 	default_env[1] = ft_strdup("LS_COLORS=");
 	default_env[2] = ft_strdup("SHLVL=1");
-	default_env[3] = ft_strdup("PATH=/usr/local/bin:"
-					"/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin");
+	default_env[3] = ft_strdup("PATH=/usr/local/bin:\
+	/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin");//tirar
 	default_env[4] = ft_strdup("_=/usr/bin/env");
 	default_env[5] = NULL;
 	return (default_env);

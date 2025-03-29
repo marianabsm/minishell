@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:19:12 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 13:33:38 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:17:40 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	msh_loop(char **envp)
         if (msh()->line && *msh()->line)
         {
             add_history(msh()->line);
-            if (parser())
-				start_executing();
-            else
-                msh()->exit_status = 2;
+			parser();
+            //if (parser())
+			//	start_executing();
+            //else
+            //    msh()->exit_status = 2;
         }
-        prep_next_cmdline(msh());
+        //prep_next_cmdline(msh());
     }
     free_and_exit(msh());
 }

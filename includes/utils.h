@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:56 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 16:45:49 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:15:05 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ int		ft_isalnum(int c);
 int		ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);
+int     is_special_char(char c);
 
 /* src/utils/delete.c */
 void	print_struct(t_token **lst_head);
-void print_exec(t_exec *exec);
+void    print_exec(t_exec *exec);
+
 //void	print_exec_struct(t_exec *exec);
 char	**copy_matrix(char **src);
 

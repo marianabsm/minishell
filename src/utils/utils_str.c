@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:50:45 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/27 16:11:04 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:14:33 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,9 @@ char	*ft_strdup(const char *s)
 	}
 	copy[i] = '\0';
 	return (copy);
+}
+
+int is_special_char(char c) 
+{
+    return (c == '<' || c == '>' || c == '|');
 }

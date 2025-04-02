@@ -6,11 +6,14 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:20:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 18:31:05 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 18:40:03 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 static int	is_redirection(const char *token)
 {
@@ -42,7 +45,7 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
     cmd->array_args = malloc((arg_count + 1) * sizeof(char *));
     if (!cmd->array_args)
     {
-        fprintf(stderr, "Error: Memory allocation failed for command arguments.\n");
+		ft_put_str_fd("Error: Memory allocation failed for command arguments.\n", STDERR_FILENO);
         return (0);
     }
     arg_pos = 0;
@@ -51,7 +54,7 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
         cmd->array_args[arg_pos] = strdup(tokens[start_token + arg_pos]);
         if (!cmd->array_args[arg_pos])
         {
-            fprintf(stderr, "Error: Memory allocation failed for argument duplication.\n");
+			ft_put_str_fd("Error: Memory allocation failed for argument duplication.\n", STDERR_FILENO);
             while (arg_pos-- > 0)
                 free(cmd->array_args[arg_pos]);
             free(cmd->array_args);
@@ -61,6 +64,27 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
     }
     cmd->array_args[arg_count] = NULL;
     return (1);
+}
+
+static int	count_command_sections(char **tokens, int token_count)
+{
+    int	section_count;
+    int	i;
+
+    section_count = 0;
+    i = 0;
+    while (i < token_count)
+    {
+        while (i < token_count && is_redirection(tokens[i]))
+            i++;
+        if (i < token_count && !is_redirection(tokens[i]))
+        {
+            section_count++;
+            while (i < token_count && !is_redirection(tokens[i]))
+                i++;
+        }
+    }
+    return (section_count);
 }
 
 t_simple_command	*split_commands_into_structs(char **tokens, int token_count, int *n_commands)
@@ -74,13 +98,13 @@ t_simple_command	*split_commands_into_structs(char **tokens, int token_count, in
     *n_commands = count_command_sections(tokens, token_count);
     if (*n_commands <= 0)
     {
-        fprintf(stderr, "Error: No commands found.\n");
+		ft_put_str_fd("Error: No commands found.\n", STDERR_FILENO);
         return (NULL);
     }
     cmds = malloc(*n_commands * sizeof(t_simple_command));
     if (!cmds)
     {
-        fprintf(stderr, "Error: Memory allocation failed for command structs.\n");
+		ft_put_str_fd("Error: Memory allocation failed for command structs.\n", STDERR_FILENO);
         return (NULL);
     }
     cmd_index = 0;

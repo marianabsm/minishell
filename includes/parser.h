@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 16:40:35 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 18:40:27 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_redirs_list		*init_redirs_list(void);
 t_command_table		*init_cmd_table(void);
 
 /* parse_command */
-int					is_redirection(const char *token);
+static int					is_redirection(const char *token);
 void				free_command_structs(t_simple_command *cmds,
 						int n_commands);
 t_simple_command	*split_commands_into_structs(char **tokens, int token_count,

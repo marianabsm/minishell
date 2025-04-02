@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 19:18:45 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:19:43 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	parser(void)
     {
         //printf("%s\n", msh()->line);
         new_line = add_spaces(msh()->line);
+        if(!new_line)
+            return(0);
         //printf("%s\n", new_line);
         split_line = split_by_spaces(new_line);
         while (split_line[token_count])

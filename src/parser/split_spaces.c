@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 22:49:40 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 15:51:50 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 20:18:52 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	parser_wdlen(char *line, int i)
 		if (!ft_isspace(line[i + len]))
 			len++;
 		else if (ft_isspace(line[i + len]) && in_quotes(line, i + len))
-			// test: see if in_quotes is working
 			len++;
 		else
 			return (len);

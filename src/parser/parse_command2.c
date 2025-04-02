@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:20:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 19:54:04 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:58:24 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

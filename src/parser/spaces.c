@@ -72,8 +72,39 @@ size_t calculate_size(const char *input) // 28 lines
     }
     return (ft_strlen(input) + extra + 1);
 }
+int check_open_single_quotes(const char *str)
+{
+    int i;
+    int single_quote_open;
+    
+    single_quote_open= 0;
 
-char* add_spaces(const char *input)
+    while (str && str[i] != '\0')
+    {
+        if (str[i] == '\'')
+            single_quote_open = !single_quote_open;
+        i++;
+    }
+    return (single_quote_open == 0);
+}
+
+int check_open_double_quotes(const char *str)
+{
+    int i;
+    int double_quote_open;
+    
+    double_quote_open= 0;
+    i = 0;
+    while (str && str[i] != '\0')
+    {
+        if (str[i] == '"')
+            double_quote_open = !double_quote_open;
+        i++;
+    }
+    return (double_quote_open == 0);
+}
+
+char *add_spaces(const char *input)
 {
     char *output;
     int i;
@@ -96,12 +127,17 @@ char* add_spaces(const char *input)
             output[j++] = input[i++];
     }
     output[j] = '\0';
-    return (output);
+    if(check_open_single_quotes(output) && check_open_double_quotes(output))
+        return(output);
+    free(output);
+    return (NULL);
 }
+        
+    
 
 // int main() 
 // {
-//     const char *input = "a<b| \'bligghg<<blo blu hh\'    \"c>>d\" <<e>f";
+//     const char *input = "a<b| 'bligghg<<blo blu hh'    \"c>>d\" <<e>f";
 //     char *output = add_spaces(input);
 //     printf("Output: %s\n", output);
 //     free(output);

@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:20:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 18:40:03 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 19:21:49 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
 
 static int	is_redirection(const char *token)
 {
-    if (strcmp(token, "|") == 0 || strcmp(token, "<") == 0 || 
-        strcmp(token, "<<") == 0 || strcmp(token, ">") == 0 || 
-        strcmp(token, ">>") == 0)
+    if (strcmp(token, "|") == 0 )
         return (1);
     return (0);
 }
@@ -45,7 +40,7 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
     cmd->array_args = malloc((arg_count + 1) * sizeof(char *));
     if (!cmd->array_args)
     {
-		ft_put_str_fd("Error: Memory allocation failed for command arguments.\n", STDERR_FILENO);
+        fprintf(stderr, "Error: Memory allocation failed for command arguments.\n");
         return (0);
     }
     arg_pos = 0;
@@ -54,7 +49,7 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
         cmd->array_args[arg_pos] = strdup(tokens[start_token + arg_pos]);
         if (!cmd->array_args[arg_pos])
         {
-			ft_put_str_fd("Error: Memory allocation failed for argument duplication.\n", STDERR_FILENO);
+            fprintf(stderr, "Error: Memory allocation failed for argument duplication.\n");
             while (arg_pos-- > 0)
                 free(cmd->array_args[arg_pos]);
             free(cmd->array_args);
@@ -65,11 +60,10 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
     cmd->array_args[arg_count] = NULL;
     return (1);
 }
-
-static int	count_command_sections(char **tokens, int token_count)
+static int  count_command_sections(char **tokens, int token_count)
 {
-    int	section_count;
-    int	i;
+    int section_count;
+    int i;
 
     section_count = 0;
     i = 0;
@@ -98,13 +92,13 @@ t_simple_command	*split_commands_into_structs(char **tokens, int token_count, in
     *n_commands = count_command_sections(tokens, token_count);
     if (*n_commands <= 0)
     {
-		ft_put_str_fd("Error: No commands found.\n", STDERR_FILENO);
+        fprintf(stderr, "Error: No commands found.\n");
         return (NULL);
     }
     cmds = malloc(*n_commands * sizeof(t_simple_command));
     if (!cmds)
     {
-		ft_put_str_fd("Error: Memory allocation failed for command structs.\n", STDERR_FILENO);
+        fprintf(stderr, "Error: Memory allocation failed for command structs.\n");
         return (NULL);
     }
     cmd_index = 0;

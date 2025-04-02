@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 13:21:03 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 19:18:45 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,42 +45,78 @@ void print_msh(t_msh *msh)
     }
 }
 
+// int	parser(void)
+// {
+//     char    *new_line;
+//     char    **split_line;
+//     t_token *teste;
+
+// 	//if (!check_quotes(msh()->line))
+//     //{
+//     //    //manda um error ?!TODO
+// 	//	return (0);
+//     //}
+//     if(check_syntax_general(msh()->line))
+//     {
+//         printf("%s\n", msh()->line);
+//         new_line = add_spaces(msh()->line);
+//         printf("%s\n", new_line);
+//         split_line = split_by_spaces(new_line);
+//         teste = matrix_to_tokens(split_line); 
+//     }
+    
+//     // while (teste->content)
+//     // {
+//     //     printf("%s\n", teste->content);
+//     //     teste->content++;
+//     // }
+    
+// 	//if (!tokenizer())
+//      //   return (0);
+//     //print_struct(&msh()->tokens);
+// 	//expander(msh()->tokens);
+//     //printf("passed\n");
+//     //if (!check_syntax(msh()->tokens))
+//     //    return (0);
+//     //if (!set_exec())
+//     //    return (0);
+//     ////até aqui tokens tá top
+//     //rm_quotes_exec();
+//     //print_exec(msh()->exec);
+//     return (1);
+// }
+
 int	parser(void)
 {
-    char    *new_line;
-    char    **split_line;
-    t_token *teste;
+    char                *new_line;
+    char                **split_line;
+    t_simple_command    *commands;
+    int                 n_commands;
+    int                 token_count;
 
-	//if (!check_quotes(msh()->line))
-    //{
-    //    //manda um error ?!TODO
-	//	return (0);
-    //}
-    if(check_syntax_general(msh()->line))
+    token_count = 0;
+    if (check_syntax_general(msh()->line))
     {
-       printf("%s\n", msh()->line);
+        //printf("%s\n", msh()->line);
         new_line = add_spaces(msh()->line);
-        printf("%s\n", new_line);
+        //printf("%s\n", new_line);
         split_line = split_by_spaces(new_line);
-        teste = matrix_to_tokens(split_line); 
+        while (split_line[token_count])
+            token_count++;
+        commands = split_commands_into_structs(split_line, token_count, &n_commands);
+        if (!commands)
+        {
+            ft_put_str_fd("Error: Failed to split commands into structs.\n", STDERR_FILENO);
+            return (0);
+        }
+        for (int i = 0; i < n_commands; i++)
+        {
+
+            printf("Command %d:\n", i + 1);
+            for (int j = 0; j < commands[i].n_of_arg; j++)
+                printf("  Arg %d: %s\n", j + 1, commands[i].array_args[j]);
+        }
+        free_command_structs(commands, n_commands);
     }
-    // while (teste->content)
-    // {
-    //     printf("%s\n", teste->content);
-    //     teste->content++;
-    // }
-    
-	//if (!tokenizer())
-     //   return (0);
-    //print_struct(&msh()->tokens);
-	//expander(msh()->tokens);
-    //printf("passed\n");
-    //if (!check_syntax(msh()->tokens))
-    //    return (0);
-    //if (!set_exec())
-    //    return (0);
-    ////até aqui tokens tá top
-    //rm_quotes_exec();
-    //print_exec(msh()->exec);
     return (1);
 }

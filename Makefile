@@ -1,5 +1,6 @@
 NAME = minishell
 CC = cc
+SANITIZE			=	-fsanitize=address
 
 SRC =			src/main/main.c \
 				src/parser/create_tokens.c \
@@ -14,6 +15,7 @@ SRC =			src/main/main.c \
 				src/parser/spaces.c \
 				src/parser/split_spaces.c \
 				src/parser/splitter.c \
+				src/parser/matrix.c \
 				src/parser/syntax.c \
 				src/parser/tokenizer.c \
 				src/parser/rm_quotes1.c \
@@ -55,7 +57,7 @@ SRC =			src/main/main.c \
 				src/utils/utils_str.c \
 				src/utils/delete.c
 
-CFLAGS =		-I./includes -g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS =		-I./includes -g #-Wall -Wextra -Werror #-fsanitize=address
 OTHERFLAGS =	-lreadline #-lasan -O3
 
 OBJ_DIR =		./obj/
@@ -66,6 +68,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(OTHERFLAGS) -o $(NAME)
+
+sanitize: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(OTHERFLAGS) $(SANITIZE) -o $(NAME)
 
 $(OBJ_DIR)%.o: src/%.c
 	mkdir -p $(dir $@)

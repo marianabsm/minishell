@@ -9,10 +9,8 @@
 /*   Updated: 2025/03/28 18:51:57 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
+#include "../includes/minishell.h"
 
 void double_quoted_string(const char *input, char *output, int *i, int *j) 
 {

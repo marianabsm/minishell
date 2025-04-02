@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/30 22:17:49 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/03/31 19:03:53 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,15 @@ size_t		calculate_size(const char *input);
 char		*add_spaces(const char *input);
 
 /* splitter */
-int			ft_isspace2(int k);
 int			count_words2(const char *str);
-char		*ft_substr(const char *str, int start, int len);
+char		*ft_substr2(const char *str, int start, int len);
 static char	*extract_next_token(const char *input, int *i);
 char		**split_by_spaces(const char *input);
+
+/* matrix */
+void assign(const char *content, t_token *new_token);
+t_token *create_token(const char *content, int index);
+void add_token_to_list(t_token **head, t_token *new_token);
+t_token *matrix_to_tokens(char **matrix);
 
 #endif

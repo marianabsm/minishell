@@ -6,18 +6,14 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:12:58 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/30 22:17:17 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/03/31 19:30:29 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+// #include <unistd.h>
+// #include <stdio.h>
 
-int ft_isspace2(int k)
-{
-    if(k == ' ')
-        return(1);
-    return(0);
-}
 
 int count_words2(const char *str)
 {
@@ -27,19 +23,19 @@ int count_words2(const char *str)
     count = 0;
     in_word = 0;
     while (*str) {
-        if (!ft_isspace2(*str) && !in_word)
+        if (!ft_isspace(*str) && !in_word)
         {
             in_word = 1;
             count++;
         }
-        else if (ft_isspace2(*str))
+        else if (ft_isspace(*str))
             in_word = 0;
         str++;
     }
     return (count);
 }
 
-char *ft_substr(const char *str, int start, int len) 
+char *ft_substr2(const char *str, int start, int len) 
 {
     char *sub;
 
@@ -51,35 +47,51 @@ char *ft_substr(const char *str, int start, int len)
     return (sub);
 }
 
-static char *extract_next_token(const char *input, int *i) // 27 lines
+static char *extract_next_token(const char *input, int *i)
 {
     int start;
-    char *token;
+    char *temp;
+    char *result;
 
-    if (input[*i] == '"') 
+    result = NULL;
+    while (input[*i] && !ft_isspace(input[*i])) 
     {
-        start = ++(*i);
-        while (input[*i] && input[*i] != '"') 
-            (*i)++;
-        token = ft_substr(input, start, *i - start);
         if (input[*i] == '"') 
-            (*i)++;
-        return (token);
+        {
+            start = (*i)++;
+            while (input[*i] && input[*i] != '"') 
+                (*i)++;
+            if (input[*i] == '"') 
+                (*i)++;
+            temp = ft_substr2(input, start, *i - start);
+        }
+        else if (input[*i] == '\'') 
+        {
+            start = (*i)++;
+            while (input[*i] && input[*i] != '\'') 
+                (*i)++;
+            if (input[*i] == '\'') 
+                (*i)++;
+            temp = ft_substr2(input, start, *i - start);
+        }
+        else 
+        {
+            start = *i;
+            while (input[*i] && !ft_isspace(input[*i]) && input[*i] != '"' && input[*i] != '\'') 
+                (*i)++;
+            temp = ft_substr2(input, start, *i - start);
+        }
+        if (!result)
+            result = temp;
+        else 
+        {
+            char *joined = ft_strjoin(result, temp);
+            free(result);
+            free(temp);
+            result = joined;
+        }
     }
-    else if (input[*i] == '\'')
-    {
-        start = ++(*i);
-        while (input[*i] && input[*i] != '\'') 
-            (*i)++;
-        token = ft_substr(input, start, *i - start);
-        if (input[*i] == '\'') 
-            (*i)++;
-        return (token);
-    }
-    start = *i;
-    while (input[*i] && !ft_isspace2(input[*i]) && input[*i] != '"' && input[*i] != '\'') 
-        (*i)++;
-    return (ft_substr(input, start, *i - start));
+    return result;
 }
 
 char **split_by_spaces(const char *input) 
@@ -94,12 +106,13 @@ char **split_by_spaces(const char *input)
     if (!input) 
         return NULL;
     word_count = count_words2(input);
+    printf("%d\n", word_count);
     matrix = (char **)malloc((word_count + 1) * sizeof(char *));
     if (!matrix)
         return NULL;
     while (input[i]) 
     {
-        if (!ft_isspace2(input[i]))
+        if (!ft_isspace(input[i]))
             matrix[k++] = extract_next_token(input, &i);
         else
             i++;

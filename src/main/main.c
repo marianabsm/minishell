@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:19:12 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/28 17:17:40 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:45:58 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    prep_next_cmdline(t_msh *m)
+void	prep_next_cmdline(t_msh *m)
 {
+	int	i;
+
 	if (!m)
 		return ;
 	if (m->line)
@@ -28,8 +30,7 @@ void    prep_next_cmdline(t_msh *m)
 	}
 	if (m->exec)
 	{
-		int i = 0;
-
+		i = 0;
 		while (i < m->exec->nbr_cmds)
 			free_exec(&m->exec[i++]);
 		m->exec = NULL;
@@ -38,27 +39,27 @@ void    prep_next_cmdline(t_msh *m)
 
 void	msh_loop(char **envp)
 {
-    init_all(envp);
-    while (1)
-    {
+	init_all(envp);
+	while (1)
+	{
 		msh()->line = readline("minishell$");
-        if (!msh()->line)
-        {
-            ft_put_str_fd("exit\n", 2);
-            break ;
-        }
-        if (msh()->line && *msh()->line)
-        {
-            add_history(msh()->line);
-			parser();
-            //if (parser())
-			//	start_executing();
-            //else
-            //    msh()->exit_status = 2;
-        }
-        //prep_next_cmdline(msh());
-    }
-    free_and_exit(msh());
+		if (!msh()->line)
+		{
+			ft_put_str_fd("exit\n", 2);
+			break ;
+		}
+		//if (msh()->line && *msh()->line)
+		//{
+		add_history(msh()->line);
+		parser();
+		//	if (parser())
+		//		start_executing();
+		//	else
+		//		msh()->exit_status = 2;
+		//}
+		//prep_next_cmdline(msh());
+	}
+	free_and_exit(msh());
 }
 
 int	main(int ac, char **av, char **envp)

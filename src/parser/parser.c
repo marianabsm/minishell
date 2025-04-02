@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/29 17:31:26 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:39:01 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void print_msh(t_msh *msh)
 int	parser(void)
 {
     char    *new_line;
+    char    **split_line;
+    t_token *teste;
+
 	//if (!check_quotes(msh()->line))
     //{
     //    //manda um error ?!TODO
@@ -56,8 +59,16 @@ int	parser(void)
     printf("%s\n", msh()->line);
     new_line = add_spaces(msh()->line);
     printf("%s\n", new_line);
-	if (!tokenizer())
-        return (0);
+    split_line = split_by_spaces(new_line);
+    teste = matrix_to_tokens(split_line);
+    // while (teste->content)
+    // {
+    //     printf("%s\n", teste->content);
+    //     teste->content++;
+    // }
+    
+	//if (!tokenizer())
+     //   return (0);
     //print_struct(&msh()->tokens);
 	//expander(msh()->tokens);
     //printf("passed\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:57:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 16:36:06 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:48:17 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_exec
 //exec[0].args[2] = >
 //exec[0].args[3] = test.c
 //exec[0].args[4] = NULL
-//
 //exec[1].args[0] = wc
 //exec[1].args[1] = -l
 //exec[1].args[2] = NULL
@@ -76,11 +75,11 @@ typedef struct s_env
 
 typedef struct s_token
 {
-	char			*content;
-	int				type;
-	int				index;
-	struct s_token	*next;
-	struct s_token	*prev;
+	char			*content; // a palavra ou simbolo
+	int				type; // pavra pipe ou redir
+	int				index; // o johny nao usou mas seria o index na matrix
+	struct s_token	*next; // o prox token
+	struct s_token	*prev; // johny nao usou mas self explanatory
 }					t_token;
 
 // rever: criar uma ft que transforma linked list em char **

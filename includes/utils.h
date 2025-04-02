@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:56 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/30 22:15:05 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 13:18:42 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ int     is_special_char(char c);
 /* src/utils/delete.c */
 void	print_struct(t_token **lst_head);
 void    print_exec(t_exec *exec);
-
-//void	print_exec_struct(t_exec *exec);
 char	**copy_matrix(char **src);
+
+
+int check_syntax_general(char *str);
 
 #endif

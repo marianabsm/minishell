@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:08:55 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/21 21:21:49 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:02:52 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-//MARIO!!!!!
-// rever: NOTA EXEC
-// tenho de dar handle do cenário em que nãao há pipes - o exec tem de a mm mandar malloc the 1
+
 int	count_cmds(t_token *tokens)
 {
 	int nbr_cmds;
@@ -97,7 +95,7 @@ t_exec *init_exec(t_token *tokens)
 
 	if (!tokens)
 		return (NULL);
-	nbr_cmds = count_cmds(tokens); //CHECK IF SYNTAX IS TRULLY WORKING
+	nbr_cmds = count_cmds(tokens);
 	exec = (t_exec *)safe_malloc(sizeof(t_exec) * (nbr_cmds + 1));
 	tokens_to_exec(tokens, exec, nbr_cmds);
 	return (exec);

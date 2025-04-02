@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/31 19:39:01 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 13:21:03 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ int	parser(void)
     //    //manda um error ?!TODO
 	//	return (0);
     //}
-    printf("%s\n", msh()->line);
-    new_line = add_spaces(msh()->line);
-    printf("%s\n", new_line);
-    split_line = split_by_spaces(new_line);
-    teste = matrix_to_tokens(split_line);
+    if(check_syntax_general(msh()->line))
+    {
+       printf("%s\n", msh()->line);
+        new_line = add_spaces(msh()->line);
+        printf("%s\n", new_line);
+        split_line = split_by_spaces(new_line);
+        teste = matrix_to_tokens(split_line); 
+    }
     // while (teste->content)
     // {
     //     printf("%s\n", teste->content);

@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:57:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/31 19:48:17 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 15:25:06 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,6 @@ typedef struct s_exec
 	int		index;
 }					t_exec;
 
-//echo "ola" > test.c | wc -l
-//exec[0].args[0] = echo
-//exec[0].args[1] = ola
-//exec[0].args[2] = >
-//exec[0].args[3] = test.c
-//exec[0].args[4] = NULL
-//exec[1].args[0] = wc
-//exec[1].args[1] = -l
-//exec[1].args[2] = NULL
-
 typedef struct s_env
 {
 	char			*var;
@@ -82,7 +72,32 @@ typedef struct s_token
 	struct s_token	*prev; // johny nao usou mas self explanatory
 }					t_token;
 
-// rever: criar uma ft que transforma linked list em char **
+/////////////////////////////////////// from here ///////////////////////////////////////
+
+typedef struct s_simple_command
+{
+	int 			n_of_arg;
+	char			**array_args;
+}					t_simple_command;
+
+typedef struct s_redirs_list
+{
+	int				redir_type;
+	char			*file;
+	char			*delimiter;
+	int				heredoc_fd;
+	int				expand_heredoc;
+}					t_redirs_list;
+
+typedef struct s_command_table
+{
+	int					shellvl; // rever : a ver com johny
+	t_simple_command	*simplecommand;
+	t_redirs_list		*redirs;
+}					t_command_table;
+
+//////////////////////////////////////// to here ////////////////////////////////////////
+
 typedef struct s_msh
 {
 	char			*line;

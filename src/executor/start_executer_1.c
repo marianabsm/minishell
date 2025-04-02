@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_executer_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:59:02 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 12:23:43 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:11:58 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 22:49:40 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/28 17:02:54 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:51:50 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char	**split_spaces(char *line)
 		while (ft_isspace(line[i]))
 			i++;
 		matrix[j] = ft_substr(line, i, parser_wdlen(line, i));
-		// ver se está a guardar bem
 		if (!matrix[j++])
 			return (matrix);
 		i += parser_wdlen(line, i);

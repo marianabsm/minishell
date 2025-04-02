@@ -6,6 +6,7 @@ SRC =			src/main/main.c \
 				src/parser/create_tokens.c \
 				src/parser/envp_1.c \
 				src/parser/envp_2.c \
+				src/parser/init_commands.c \
 				src/parser/init_exec.c \
 				src/parser/init.c \
 				src/parser/parser.c \
@@ -16,6 +17,7 @@ SRC =			src/main/main.c \
 				src/parser/split_spaces.c \
 				src/parser/splitter.c \
 				src/parser/matrix.c \
+				src/parser/parse_command.c \
 				src/parser/syntax.c \
 				src/parser/tokenizer.c \
 				src/parser/rm_quotes1.c \
@@ -53,6 +55,7 @@ SRC =			src/main/main.c \
 				src/utils/libft_utils4.c \
 				src/utils/libft_utils5.c \
 				src/utils/malloc.c \
+				src/utils/syntax_errors.c \
 				src/utils/utils_builtins.c \
 				src/utils/utils_str.c \
 				src/utils/delete.c

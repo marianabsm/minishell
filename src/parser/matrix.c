@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 18:13:34 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/31 19:21:18 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 15:37:38 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void assign(const char *content, t_token *new_token)
     else if (ft_strcmp(content, "<<") == 0)
         new_token->type = HERE_DOC;
     else
-        new_token->type = CMD; 
+        new_token->type = CMD; // rever : fazer parsing de se é comando ou argumento (echo / "olá")
 }
 
 t_token *create_token(const char *content, int index)

@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:57:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 19:26:30 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:51:41 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_redirs_list
 	char			*delimiter;
 	int				heredoc_fd;
 	int				expand_heredoc;
-	next
+	struct s_redirs_list *next;
 }					t_redirs_list;
 
 typedef struct s_command_table
@@ -95,7 +95,7 @@ typedef struct s_command_table
 	int					shellvl; // rever : a ver com johny
 	t_simple_command	*simplecommand;
 	t_redirs_list		*redirs;
-	next
+	struct s_command_table *next;
 }					t_command_table;
 
 //////////////////////////////////////// to here ////////////////////////////////////////

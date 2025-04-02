@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_command.c                                    :+:      :+:    :+:   */
+/*   parse_command1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:20:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 19:21:49 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:54:17 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	copy_args_to_command(t_simple_command *cmd, char **tokens, int start_
     cmd->array_args[arg_count] = NULL;
     return (1);
 }
+
 static int  count_command_sections(char **tokens, int token_count)
 {
     int section_count;

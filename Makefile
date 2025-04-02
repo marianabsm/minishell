@@ -17,7 +17,8 @@ SRC =			src/main/main.c \
 				src/parser/split_spaces.c \
 				src/parser/splitter.c \
 				src/parser/matrix.c \
-				src/parser/parse_command.c \
+				src/parser/parse_command1.c \
+				src/parser/parse_command2.c \
 				src/parser/syntax.c \
 				src/parser/tokenizer.c \
 				src/parser/rm_quotes1.c \

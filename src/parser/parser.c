@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/03 16:06:27 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 17:16:23 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void print_msh(t_msh *msh)
         token = token->next;
     }
 }
+/////////////////////////// parser og madalena ////////////////////////
 
 // int	parser(void)
 // {
@@ -64,13 +65,11 @@ void print_msh(t_msh *msh)
 //         split_line = split_by_spaces(new_line);
 //         teste = matrix_to_tokens(split_line); 
 //     }
-    
 //     // while (teste->content)
 //     // {
 //     //     printf("%s\n", teste->content);
 //     //     teste->content++;
 //     // }
-    
 // 	//if (!tokenizer())
 //      //   return (0);
 //     //print_struct(&msh()->tokens);
@@ -86,46 +85,6 @@ void print_msh(t_msh *msh)
 //     return (1);
 // }
 
-// int	parser(void)
-// {
-//     char                *new_line;
-//     char                **split_line;
-//     int                 n_commands;
-//     int                 token_count;
-//     t_command_table *command_table;
-//     t_token *teste;
-
-//     token_count = 0;
-//     command_table = init_cmd_table(); // changed and now nana is lost
-//     if (check_syntax_general(msh()->line))
-//     {
-//         //printf("%s\n", msh()->line);
-//         new_line = add_spaces(msh()->line);
-//         if(!new_line)
-//             return(0);
-//         //printf("%s\n", new_line);
-//         split_line = split_by_spaces(new_line);
-//         teste = matrix_to_tokens(split_line/*, command_table->redirs*/);
-//         while (split_line[token_count])
-//             token_count++; 
-//         command_table->simplecommand = split_commands_into_structs(split_line, token_count, &n_commands);
-//         if (!command_table->simplecommand)
-//         {
-//             ft_put_str_fd("Error: Failed to split commands into structs.\n", STDERR_FILENO);
-//             return (0);
-//         }
-//         for (int i = 0; i < n_commands; i++)
-//         {
-
-//             printf("Command %d:\n", i + 1);
-//             for (int j = 0; j < command_table->simplecommand[i].n_of_arg; j++)
-//                 printf("  Arg %d: %s\n", j + 1, command_table->simplecommand[i].array_args[j]);
-//         }
-//         free_command_structs(command_table->simplecommand, n_commands);
-//     }
-//     return (1);
-// }
-
 int	parser(void)
 {
     char                *new_line;
@@ -135,10 +94,10 @@ int	parser(void)
     t_redirs_list       *redirs_list = NULL;
     t_command_table     *command_table;
     t_token             *teste;
-
+    int redir_type = 0;
+    char *redir_file = NULL;
+    char *redir_delimiter = NULL;
     token_count = 0;
-
-    // Check syntax and prepare the input line
     if (check_syntax_general(msh()->line))
     {
         new_line = add_spaces(msh()->line);
@@ -148,15 +107,13 @@ int	parser(void)
         split_line = split_by_spaces(new_line);
         if (!split_line)
             return (0);
-
-        // Parse redirections from the tokens
         parse_redirections(split_line, &redirs_list);
-
-        // Initialize the command table with the first redirection (if any)
-        int redir_type = redirs_list ? redirs_list->redir_type : 0;
-        char *redir_file = redirs_list ? redirs_list->file : NULL;
-        char *redir_delimiter = redirs_list ? redirs_list->delimiter : NULL;
-
+        if (redirs_list)
+        {
+            redir_type = redirs_list->redir_type;
+            redir_file = redirs_list->file;
+            redir_delimiter = redirs_list->delimiter;
+        }
         command_table = init_cmd_table(redir_type, redir_file, redir_delimiter);
         if (!command_table)
         {
@@ -164,12 +121,9 @@ int	parser(void)
             free_redirs_list(redirs_list);
             return (0);
         }
-
-        // Convert tokens to structures
         teste = matrix_to_tokens(split_line);
         while (split_line[token_count])
             token_count++;
-
         command_table->simplecommand = split_commands_into_structs(split_line, token_count, &n_commands);
         if (!command_table->simplecommand)
         {
@@ -178,19 +132,12 @@ int	parser(void)
             free(command_table);
             return (0);
         }
-
-        // Debugging: Print parsed commands
-        for (int i = 0; i < n_commands; i++)
-        {
-            printf("Command %d:\n", i + 1);
-            for (int j = 0; j < command_table->simplecommand[i].n_of_arg; j++)
-                printf("  Arg %d: %s\n", j + 1, command_table->simplecommand[i].array_args[j]);
-        }
-
-        // Free resources
-        free_command_structs(command_table->simplecommand, n_commands);
-        free_redirs_list(redirs_list);
-        free(command_table);
+        print_simple_command(command_table->simplecommand);
+        print_simple_command(&command_table->simplecommand[1]);
+        print_redirs(redirs_list);
     }
+    free_command_structs(command_table->simplecommand, n_commands);
+    free_redirs_list(redirs_list);
+    free(command_table);
     return (1);
 }

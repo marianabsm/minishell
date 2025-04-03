@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/03 15:57:51 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 17:10:05 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,9 @@ static int			count_args_for_command(char **tokens, int token_count,
 /* parse_command 2 */
 void				parse_redirections(char **tokens,t_redirs_list **redirs_list);
 void				free_redirs_list(t_redirs_list *head);
+
+/*testers*/
+void print_simple_command(t_simple_command *simple_command);
+void print_redirs(t_redirs_list *redirs);
 
 #endif

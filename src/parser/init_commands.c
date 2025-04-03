@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:03:37 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/03 14:39:04 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 17:03:31 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

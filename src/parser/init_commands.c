@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:03:37 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/03 14:04:50 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 14:39:04 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ t_simple_command *init_simple_command(void)
     return (simple_command);
 }
 
-t_redirs_list *init_redirs_list(void)
+t_redirs_list *init_redirs_list(int type, char *file, char *delimiter)
 {
-    t_redirs_list *redirs;
-
-    redirs = (t_redirs_list *)malloc(sizeof(t_redirs_list));
-    if (!redirs)
+    t_redirs_list *new;
+    
+    new = malloc(sizeof(t_redirs_list));
+    if (!new)
         return (NULL);
-    redirs->redir_type = 0;
-    redirs->file = NULL;
-    redirs->delimiter = NULL;
-    redirs->heredoc_fd = -1;
-    redirs->expand_heredoc = 0;
-    redirs->next = NULL;
-    return (redirs);
+    new->redir_type = type;
+    new->file = NULL;
+    if (file)
+        new->file = ft_strdup(file);
+    new->delimiter = NULL;
+    if (delimiter)
+        new->delimiter = ft_strdup(delimiter);
+    new->heredoc_fd = -1;
+    new->expand_heredoc = 0;
+    new->next = NULL;
+    return (new);
 }
 
-t_command_table	*init_cmd_table(void)
+
+t_command_table	*init_cmd_table(int type, char *file, char *delimiter)
 {
     t_command_table *command_table;
     
@@ -54,7 +59,7 @@ t_command_table	*init_cmd_table(void)
         free(command_table);
         return (NULL);
     }
-    command_table->redirs = init_redirs_list();
+    command_table->redirs = init_redirs_list(type, file, delimiter);
     command_table->next = NULL;
     if (!command_table->redirs)
     {

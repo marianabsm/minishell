@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/03 14:22:20 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 15:57:51 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,19 @@ static char			*extract_next_token(const char *input, int *i);
 char				**split_by_spaces(const char *input);
 
 /* matrix */
-void assign(const char *content, t_token *new_token);
+void				assign(const char *content, t_token *new_token);
 // void assign(const char *content, t_token *new_token, t_redirs_list *red_list);
-t_token *create_token(const char *content, int index);
+t_token				*create_token(const char *content, int index);
 void				add_token_to_list(t_token **head, t_token *new_token);
-t_token *matrix_to_tokens(char **matrix);
+t_token				*matrix_to_tokens(char **matrix);
 
 /* init commands */
 t_simple_command	*init_simple_command(void);
-t_redirs_list		*init_redirs_list(void);
-t_command_table		*init_cmd_table(void);
+t_redirs_list		*init_redirs_list(int type, char *file, char *delimiter);
+t_command_table		*init_cmd_table(int type, char *file, char *delimiter);
 
-/* parse_command */
-static int					is_redirection(const char *token);
+/* parse_command 1 */
+static int			is_redirection(const char *token);
 void				free_command_structs(t_simple_command *cmds,
 						int n_commands);
 t_simple_command	*split_commands_into_structs(char **tokens, int token_count,
@@ -122,5 +122,9 @@ static int			copy_args_to_command(t_simple_command *cmd, char **tokens,
 						int start_token, int arg_count);
 static int			count_args_for_command(char **tokens, int token_count,
 						int *token_index);
+
+/* parse_command 2 */
+void				parse_redirections(char **tokens,t_redirs_list **redirs_list);
+void				free_redirs_list(t_redirs_list *head);
 
 #endif

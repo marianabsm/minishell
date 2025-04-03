@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/03 17:16:23 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:02:18 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int	parser(void)
             free(command_table);
             return (0);
         }
-        print_simple_command(command_table->simplecommand);
-        print_simple_command(&command_table->simplecommand[1]);
-        print_redirs(redirs_list);
+        // print_simple_command(command_table->simplecommand);
+        // print_simple_command(&command_table->simplecommand[1]);
+        // print_redirs(redirs_list);
     }
     free_command_structs(command_table->simplecommand, n_commands);
     free_redirs_list(redirs_list);

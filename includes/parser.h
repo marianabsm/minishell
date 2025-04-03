@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 21:56:16 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 14:22:20 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,11 @@ static char			*extract_next_token(const char *input, int *i);
 char				**split_by_spaces(const char *input);
 
 /* matrix */
-void assign(const char *content, t_token *new_token, t_redirs_list *red_list);
-t_token *create_token(const char *content, int index, t_redirs_list *red_list);
+void assign(const char *content, t_token *new_token);
+// void assign(const char *content, t_token *new_token, t_redirs_list *red_list);
+t_token *create_token(const char *content, int index);
 void				add_token_to_list(t_token **head, t_token *new_token);
-t_token *matrix_to_tokens(char **matrix, t_redirs_list *red_list);
+t_token *matrix_to_tokens(char **matrix);
 
 /* init commands */
 t_simple_command	*init_simple_command(void);

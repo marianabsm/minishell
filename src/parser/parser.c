@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 20:19:43 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 22:06:22 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ int	parser(void)
 {
     char                *new_line;
     char                **split_line;
-    t_simple_command    *commands;
     int                 n_commands;
     int                 token_count;
+    t_command_table *command_table;
+    t_token *teste;
 
     token_count = 0;
+    command_table = init_cmd_table();
     if (check_syntax_general(msh()->line))
     {
         //printf("%s\n", msh()->line);
@@ -103,10 +105,11 @@ int	parser(void)
             return(0);
         //printf("%s\n", new_line);
         split_line = split_by_spaces(new_line);
+        teste = matrix_to_tokens(split_line, command_table->redirs);
         while (split_line[token_count])
-            token_count++;
-        commands = split_commands_into_structs(split_line, token_count, &n_commands);
-        if (!commands)
+            token_count++; 
+        command_table->simplecommand = split_commands_into_structs(split_line, token_count, &n_commands);
+        if (!command_table->simplecommand)
         {
             ft_put_str_fd("Error: Failed to split commands into structs.\n", STDERR_FILENO);
             return (0);
@@ -115,10 +118,10 @@ int	parser(void)
         {
 
             printf("Command %d:\n", i + 1);
-            for (int j = 0; j < commands[i].n_of_arg; j++)
-                printf("  Arg %d: %s\n", j + 1, commands[i].array_args[j]);
+            for (int j = 0; j < command_table->simplecommand[i].n_of_arg; j++)
+                printf("  Arg %d: %s\n", j + 1, command_table->simplecommand[i].array_args[j]);
         }
-        free_command_structs(commands, n_commands);
+        free_command_structs(command_table->simplecommand, n_commands);
     }
     return (1);
 }

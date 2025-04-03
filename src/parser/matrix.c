@@ -6,14 +6,15 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 18:13:34 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 15:37:38 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 21:51:02 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void assign(const char *content, t_token *new_token)
+void assign(const char *content, t_token *new_token, t_redirs_list *red_list)
 {
+    printf("next token: %s\n", new_token->next->content);
     if (ft_strcmp(content, "|") == 0)
         new_token->type = PIPE;
     else if (ft_strcmp(content, ">") == 0)
@@ -25,10 +26,12 @@ void assign(const char *content, t_token *new_token)
     else if (ft_strcmp(content, "<<") == 0)
         new_token->type = HERE_DOC;
     else
-        new_token->type = CMD; // rever : fazer parsing de se é comando ou argumento (echo / "olá")
+        new_token->type = CMD;
+    // if(new_token->type != CMD)
+    //     set_redir(new_token->content, red_list, new_token->type, new_token);
 }
 
-t_token *create_token(const char *content, int index)
+t_token *create_token(const char *content, int index, t_redirs_list *red_list)
 {
     t_token *new_token;
 
@@ -41,7 +44,7 @@ t_token *create_token(const char *content, int index)
         free(new_token);
         return (NULL);
     }
-    assign(content, new_token);
+    assign(content, new_token,red_list);
     new_token->index = index;
     new_token->next = NULL;
     new_token->prev = NULL;
@@ -64,7 +67,7 @@ void add_token_to_list(t_token **head, t_token *new_token)
     new_token->prev = temp;
 }
 
-t_token *matrix_to_tokens(char **matrix)
+t_token *matrix_to_tokens(char **matrix, t_redirs_list *red_list)
 {
     t_token *tokens;
     t_token *new_token;
@@ -75,7 +78,7 @@ t_token *matrix_to_tokens(char **matrix)
     while (matrix[i])
     {
         printf("Creating token ->%s\n", matrix[i]);
-        new_token = create_token(matrix[i], i);
+        new_token = create_token(matrix[i], i, red_list);
         if (!new_token)
         {
             while (tokens)

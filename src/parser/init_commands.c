@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:03:37 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/02 21:56:13 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/03 14:04:50 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_redirs_list *init_redirs_list(void)
     redirs->delimiter = NULL;
     redirs->heredoc_fd = -1;
     redirs->expand_heredoc = 0;
+    redirs->next = NULL;
     return (redirs);
 }
 
@@ -54,6 +55,7 @@ t_command_table	*init_cmd_table(void)
         return (NULL);
     }
     command_table->redirs = init_redirs_list();
+    command_table->next = NULL;
     if (!command_table->redirs)
     {
         free(command_table->simplecommand);

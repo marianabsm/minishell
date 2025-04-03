@@ -77,8 +77,10 @@ int check_open_single_quotes(const char *str)
     int i;
     int single_quote_open;
     
-    single_quote_open= 0;
-
+    single_quote_open = 0;
+    i = 0;
+    if(!str)
+        return(0);
     while (str && str[i] != '\0')
     {
         if (str[i] == '\'')
@@ -95,6 +97,8 @@ int check_open_double_quotes(const char *str)
     
     double_quote_open= 0;
     i = 0;
+    if(!str)
+        return(0);
     while (str && str[i] != '\0')
     {
         if (str[i] == '"')

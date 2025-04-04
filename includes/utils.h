@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:56 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/02 13:18:42 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/04 15:50:53 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	prep_out_redir(t_exec *exec);
 void	free_var(t_env *var);
 void	free_matrix(char **matrix);
 void	free_tokens(t_token *tokens);
-void	free_env(t_env *env);
+//void	free_env(t_env *env);
 void	free_exec(t_exec *ex);
 
 /* src/utils/free_2.c */

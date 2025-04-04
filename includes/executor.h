@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 19:58:02 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 10:06:24 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:15:56 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int ft_check_access(char *str, char *cmd, char **tmp);
 
 
 /* src/executor/execute_builtins.c */
-int     execute_builtin(t_exec *exec);
-void    execute_builtin_in_fork(void); // Adjust parameters as needed
-int     is_builtin(char *command);
+// int     execute_builtin(t_exec *exec);
+// void    execute_builtin_in_fork(void); // Adjust parameters as needed
+// int     is_builtin(char *command);
 
 /* fork_and_execute1.c */
 void    handle_error(const char *message);
@@ -60,7 +60,7 @@ void    close_args_fds(t_exec *ex);
 int     fix_fd_pipe(t_exec *ex);
 int     do_child(t_exec *exec);
 void    new_child(t_exec *ex);
-void    exec_single_cmd(t_exec *ex, int in, int out);
+// void    exec_single_cmd(t_exec *ex, int in, int out);
 void    start_executing(void);
 
 /* sys_call_error.c */

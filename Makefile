@@ -4,6 +4,7 @@ SANITIZE			=	-fsanitize=address
 
 SRC =			src/main/main.c \
 				src/parser/create_tokens.c \
+				src/parser/env.c \
 				src/parser/envp_1.c \
 				src/parser/envp_2.c \
 				src/parser/init_commands.c \

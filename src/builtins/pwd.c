@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 17:32:36 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/21 04:00:02 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/04 16:12:43 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ void	pwd(int fd)
 	}
 }
 
-void	update_pwd(void)
-{
-	t_env	*env;
-	char	*old_pwd;
+// void	update_pwd(void)
+// {
+// 	t_env	*env;
+// 	char	*old_pwd;
 
-	env = msh()->env;
-	while (env)
-	{
-		if (ft_strcmp(env->var_name, "PWD") == 0)
-		{
-			old_pwd = env->var_value;
-			env->var_value = getcwd(NULL, 0);
-			free(old_pwd);
-			return ;
-		}
-		env = env->next;
-	}
-}
+// 	env = msh()->env;
+// 	while (env)
+// 	{
+// 		if (ft_strcmp(env->var_name, "PWD") == 0)
+// 		{
+// 			old_pwd = env->var_value;
+// 			env->var_value = getcwd(NULL, 0);
+// 			free(old_pwd);
+// 			return ;
+// 		}
+// 		env = env->next;
+// 	}
+// }

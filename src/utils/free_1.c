@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:17:41 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 16:12:54 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:50:36 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ void	free_var(t_env *var)
 	free(var);
 }
 
-void	free_env(t_env *env)
-{
-	t_env	*temp;
+// void	free_env(t_env *env)
+// {
+// 	t_env	*temp;
 
-	if (!env)
-		return ;
-	while (env)
-	{
-		temp = env->next;
-		free_var(env);
-		env = temp;
-	}
-}
+// 	if (!env)
+// 		return ;
+// 	while (env)
+// 	{
+// 		temp = env->next;
+// 		free_var(env);
+// 		env = temp;
+// 	}
+// }
 
 void	free_matrix(char **matrix)
 {

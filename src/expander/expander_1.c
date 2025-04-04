@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:25:45 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/20 07:44:41 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:17:15 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,20 @@ char	*update_content(t_token *token, char *old, char *expanded)
 	return (0);
 }
 
-void	expander(t_token *tokens)
-{
-	t_token	*temp;
+// void	expander(t_token *tokens)
+// {
+// 	t_token	*temp;
 
-	temp = tokens;
-	while (temp)
-	{
-		ignore_dollar(temp->content);
-		if (needs_expansion(temp))
-			expand_var(temp, msh());
-		else
-		{
-			put_dollar_back(temp->content);
-			temp = temp->next;
-		}
-	}
-}
+// 	temp = tokens;
+// 	while (temp)
+// 	{
+// 		ignore_dollar(temp->content);
+// 		if (needs_expansion(temp))
+// 			expand_var(temp, msh());
+// 		else
+// 		{
+// 			put_dollar_back(temp->content);
+// 			temp = temp->next;
+// 		}
+// 	}
+// }

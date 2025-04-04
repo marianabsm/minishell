@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:44:20 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/27 16:12:27 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:10:09 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ int	needs_expansion(t_token *token)
 	return (0);
 }
 
-void	expand_var(t_token *token, t_msh *msh)
-{
-	char	*var_name;
-	char	*var_value;
-	char	*updated;
+// void	expand_var(t_token *token, t_msh *msh)
+// {
+// 	char	*var_name;
+// 	char	*var_value;
+// 	char	*updated;
 
-	var_name = grep_var_name(token);
-	if (is_edge_expand(var_name))
-		var_value = edge_expand(var_name, msh);
-	else
-		var_value = regular_expand(msh->env, var_name);
-	updated = update_content(token, token->content, var_value);
-	free(token->content);
-	token->content = updated;
-	free(var_name);
-	free(var_value);
-}
+// 	var_name = grep_var_name(token);
+// 	if (is_edge_expand(var_name))
+// 		var_value = edge_expand(var_name, msh);
+// 	else
+// 		var_value = regular_expand(msh->env, var_name);
+// 	updated = update_content(token, token->content, var_value);
+// 	free(token->content);
+// 	token->content = updated;
+// 	free(var_name);
+// 	free(var_value);
+// }
 
 
 

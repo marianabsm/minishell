@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:00 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 01:01:14 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:14:28 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../includes/minishell.h"
 
-char	*path_search(char *str, t_env *env);
+// char	*path_search(char *str, t_env *env);
 
 /* cd */
 void	cd(char **args, int fd);
@@ -51,21 +51,21 @@ int		find_var_index(char **env, const char *var, int name_len);
 void	add_new_var(char **env, const char *var);
 
 /* export2 */
-void	add_or_update_env_var(char **env, const char *var);
-char	**get_matrix_env(t_env *env);
-void	print_sorted_env(t_env *env, int fd);
-void	export_command(char **args, t_env *env,int fd);
+// void	add_or_update_env_var(char **env, const char *var);
+// char	**get_matrix_env(t_env *env);
+// void	print_sorted_env(t_env *env, int fd);
+// void	export_command(char **args, t_env *env,int fd);
 // char	**init_export_array(char **env);
 
 /* pwd */
 void	pwd(int fd);
-void	update_pwd(void);
+// void	update_pwd(void);
 
-/* unset1 */
-void	exec_unset(char **envp);
-void	unset_env_var(char **envp, char **export, const char *var);
-void	remove_from_array(char **array, int index);
-int		input_size(char **array);
-void	read_unset(char **envp, char **export, char **cmds, int *exit_status);
+// /* unset1 */
+// void	exec_unset(char **envp);
+// void	unset_env_var(char **envp, char **export, const char *var);
+// void	remove_from_array(char **array, int index);
+// int		input_size(char **array);
+// void	read_unset(char **envp, char **export, char **cmds, int *exit_status);
 
 #endif

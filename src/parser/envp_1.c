@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 01:27:31 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/20 21:37:09 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:06:40 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,29 @@ int	check_env(char **envp)
 	return (i);
 }
 
-t_env	*get_env(char **envp)
-{
-	int		i;
-	t_env	*end;
-	t_env	*temp;
+// t_env	*get_env(char **envp)
+// {
+// 	int		i;
+// 	t_env	*end;
+// 	t_env	*temp;
 
-	i = 0;
-	temp = NULL;
-	end = NULL;
-	if (check_env(envp) == 0)
-		msh()->env  = empty_env();
-	else
-	{
-		while (envp[i])
-		{
-			temp = create_var(envp[i]);
-			if (!msh()->env)
-				msh()->env = temp;
-			else
-				end->next = temp;
-			i++;
-			end = temp;
-		}
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	temp = NULL;
+// 	end = NULL;
+// 	// if (check_env(envp) == 0)
+// 	// 	msh()->env  = empty_env();
+// 	else
+// 	{
+// 		while (envp[i])
+// 		{
+// 			temp = create_var(envp[i]);
+// 			if (!msh()->env)
+// 				msh()->env = temp;
+// 			else
+// 				end->next = temp;
+// 			i++;
+// 			end = temp;
+// 		}
+// 	}
+// 	return (NULL);
+// }

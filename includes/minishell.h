@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:57:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/03 16:39:52 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:51:38 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ typedef struct s_msh
 	char			*line;
 	char			*home;
 	char			*pwd;
-	t_env			*env;
+	//t_env			*env;
+	char			**env; // aqui
 	t_token			*tokens;
 	t_exec			*exec;
 	int				exit_status;

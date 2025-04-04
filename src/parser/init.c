@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:18:18 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/20 21:36:20 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:09:52 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ t_msh	*msh(void)
 	return (&msh);
 }
 
-t_msh	*init_all(char **envp)
+t_msh	*init_all(char **envp) // aqui
 {
 	msh()->line = NULL;
 	msh()->tokens = NULL;
-	get_env(envp);
+	// get_env(envp);
+	msh()->env = duplicate_envp(envp);
 	msh()->home = get_home();
 	msh()->pwd = getcwd(NULL, 0);
 	msh()->exec = NULL;

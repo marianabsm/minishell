@@ -26,3 +26,48 @@ void print_simple_command(t_simple_command *simple_command)
         printf("  Arg %d: %s\n", i + 1, simple_command->array_args[i]);
     }
 }
+
+void print_command_table(t_command_table *command_table)
+{
+    int command_index = 1;
+
+    while (command_table)
+    {
+        printf("Command table:\n");
+        printf("- Simple command %d:\n", command_index);
+        for (int i = 0; i < command_table->simplecommand->n_of_arg; i++)
+            printf("  - %s\n", command_table->simplecommand->array_args[i]);
+
+        printf("- Redirs %d:\n", command_index);
+        t_redirs_list *redir = command_table->redirs;
+        while (redir)
+        {
+            if (redir->redir_type == R_OUT)
+                printf("  - >%s\n", redir->file);
+            else if (redir->redir_type == R_APP)
+                printf("  - >>%s\n", redir->file);
+            else if (redir->redir_type == R_IN)
+                printf("  - <%s\n", redir->file);
+            else if (redir->redir_type == HERE_DOC)
+                printf("  - <<%s\n", redir->delimiter);
+            redir = redir->next;
+        }
+
+        command_table = command_table->next;
+        command_index++;
+    }
+}
+
+void free_command_table(t_command_table *command_table)
+{
+    t_command_table *tmp;
+
+    while (command_table)
+    {
+        tmp = command_table;
+        free_redirs_list(command_table->redirs);
+        free(command_table->simplecommand);
+        command_table = command_table->next;
+        free(tmp);
+    }
+}

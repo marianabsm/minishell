@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 01:39:20 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/05 17:26:22 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:25:51 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*find_var_in_env(char *input, char *var_name, char **env);
 
 /* expand2.c */
 char	*delete_name_and_dollar_sign(char *input, char *var_name);
-char	*expand_var(char *input, t_token *token);
+char	*expand_var(char *input);
 int     should_expand(char *input);
 
 #endif

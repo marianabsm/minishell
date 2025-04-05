@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/05 17:29:51 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/05 21:36:15 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,57 @@ char *delete_name_and_dollar_sign (char *input, char *var_name)
     return(new_input);
 }
 
-char *expand_var(char *input, t_token *token)
+char *ft_strjoin_char(char *s1, char c)
+{
+    char *result;
+    int len;
+
+    if (!s1)
+        return (NULL);
+    len = ft_strlen(s1);
+    result = malloc(sizeof(char) * (len + 2));
+    if (!result)
+        return (NULL);
+    ft_strcpy(result, s1);
+    result[len] = c;
+    result[len + 1] = '\0';
+    return (result);
+}
+
+char *expand_var(char *input)
 {
     char *var_name;
     char *var_value;
+    char *new_input;
+    char *temp;
     int i;
+    int var_size;
 
+    new_input = ft_strdup("");
     i = 0;
-    while (token->content[i])
+    while (input[i])
     {
-        if (token->content[i] == '$'|| token->content[i] == '\'' || token->content[i] == '"')
+        if (input[i] == '$' && should_expand(&input[i]))
         {
-            if(should_expand(&token->content[i]))
+            var_size = find_and_size_var_name(&input[i]);
+            var_name = find_var_name2(&input[i], var_size);
+            var_value = find_var_in_env(input, var_name, msh()->env);
+            if (var_value)
             {
-                var_name = find_var_name2(input, find_and_size_var_name(input));
-                var_value = find_var_in_env(input, var_name, msh()->env);
-                if (var_value)
-                {
-                    token->content = ft_strjoin(token->content, var_value);
-                    free(var_value);
-                }
+                free(new_input);
+                new_input = temp;
+                free(var_value);
             }
+            free(var_name);
+            i += var_size + 1; // Skip the variable name and '$'
         }
-        i++;
+        else
+        {
+            temp = ft_strjoin_char(new_input, input[i]); // Append the current character
+            free(new_input);
+            new_input = temp;
+            i++;
+        }
     }
-    return (token->content);
+    return (new_input);
 }
-

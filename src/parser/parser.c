@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/04 15:23:25 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/05 19:28:27 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,20 @@ int	parser(void)
         print_command_table(command_table);
 
         // Free the command table
-        free_command_table(command_table);
+        //free_command_table(command_table);
+        t_command_table *tmp = command_table;
+        int i = -1;
+        while (tmp)
+        {
+            while (++i < tmp->simplecommand->n_of_arg)
+            {
+                printf("Before Expander -> %s\n", tmp->simplecommand->array_args[i]);
+                tmp->simplecommand->array_args[i] = expand_var(tmp->simplecommand->array_args[i]);
+                printf("After Expander -> %s\n", tmp->simplecommand->array_args[i]);
+            }
+            tmp = tmp->next;
+        }
+        
     }
     return (1);
 }

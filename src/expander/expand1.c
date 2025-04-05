@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/05 17:27:15 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:52:11 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,33 @@ int find_and_size_var_name(char *input) // finds var name in the input string
         }
         i++;
     }
-    return (i - j);
+    return (i - j - 1);
 }
 
 char *find_var_name2(char *input, int size_of_var_name) // finds var name in the input string
 {
     int i;
+    int j;
     char *var_name;
 
     i = 0;
-    var_name = (char *)malloc(sizeof(char) * (size_of_var_name + 1));
+    printf("Size -> %d\n", size_of_var_name);
+    var_name = malloc(sizeof(char) * (size_of_var_name + 1));
     if (!var_name)
         return (NULL);
+    while (input[i] != '$')
+        i++;
+    i++;
+    j = 0;
     while (input[i] && (input[i] == '_' || ft_isalnum(input[i])))
     {
-        var_name[i] = input[i];
+        var_name[j] = input[i];
+        //printf("Character -> %c\n", var_name[j]);
         i++;
+        j++;
     }
+    var_name[j] = '\0';
+    printf("Var Name -> %s\n", var_name);
     return (var_name);
 }
 

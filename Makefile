@@ -23,7 +23,8 @@ SRC =			src/main/main.c \
 				src/parser/syntax.c \
 				src/parser/tokenizer.c \
 				src/parser/rm_quotes1.c \
-				src/expander/expand.c \
+				src/expander/expand1.c \
+				src/expander/expand2.c \
 				src/expander/expander_1.c \
                 src/expander/expander_2.c \
                 src/expander/expander_3.c \

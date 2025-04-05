@@ -6,7 +6,7 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/05 19:52:11 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/05 22:10:51 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,70 @@
 // Se o primeiro char for numero apago dollar sign e número ✅
 
 // Se nao estiver no env apago o dollar sign e o nome ✅
-// Sempre que tem um $ tenta expandir a menos que esteja entre pelicas especificamente (aspas expande) 
+// Sempre que tem um $ tenta expandir a menos que esteja entre pelicas especificamente (aspas expande) ✅ 
+
+// int find_and_size_var_name(char *input) // finds var name in the input string
+// {
+//     int i;
+//     int j;
+    
+//     i = 0;
+//     if(!input)
+//         return (0);
+//     while(input[i])
+//     {
+//         if (input[i] == '$')
+//         {
+//             j = i; // guarda o index do $ para depois apagar
+//             i++;
+//             if(ft_isdigit(input[i])) // se o primeiro char for numero
+//             {
+//                 delete_number_and_dollar_sign(input, j);
+//                 return(0);
+//             }
+//             else if(!ft_isalnum(input[i])) // se o primeiro char nao for valido
+//             {
+//                 delete_dollar_sign(input, j);
+//                 return(0);
+//             }
+//             while(input[i] && (input[i] == '_' || ft_isalnum(input[i]))) //size of var name
+//                 i++;
+//             break;
+//         }
+//         i++;
+//     }
+//     return (i - j - 1);
+// }
 
 int find_and_size_var_name(char *input) // finds var name in the input string
 {
     int i;
     int j;
-    
+
     i = 0;
-    if(!input)
+    if (!input)
         return (0);
-    while(input[i])
+    while (input[i])
     {
         if (input[i] == '$')
         {
-            j = i; // guarda o index do $ para depois apagar
+            j = i;
             i++;
-            if(ft_isdigit(input[i])) // se o primeiro char for numero
-            {
-                delete_number_and_dollar_sign(input, j);
-                return(0);
-            }
-            else if(!ft_isalnum(input[i])) // se o primeiro char nao for valido
-            {
-                delete_dollar_sign(input, j);
-                return(0);
-            }
-            while(input[i] && (input[i] == '_' || ft_isalnum(input[i]))) //size of var name
+            if (input[i] == '"')
                 i++;
-            break;
+            if (ft_isdigit(input[i]))
+                return (0);
+            else if (!ft_isalnum(input[i]) && input[i] != '_')
+                return (0);
+            while (input[i] && (input[i] == '_' || ft_isalnum(input[i])))
+                i++;
+            if (input[i] == '"')
+                i++;
+            return (i - j - 1);
         }
         i++;
     }
-    return (i - j - 1);
+    return (0);
 }
 
 char *find_var_name2(char *input, int size_of_var_name) // finds var name in the input string
@@ -62,26 +93,27 @@ char *find_var_name2(char *input, int size_of_var_name) // finds var name in the
     int j;
     char *var_name;
 
-    i = 0;
-    printf("Size -> %d\n", size_of_var_name);
+    if (size_of_var_name <= 0)
+        return (NULL);
+
     var_name = malloc(sizeof(char) * (size_of_var_name + 1));
     if (!var_name)
         return (NULL);
+    i = 0;
     while (input[i] != '$')
         i++;
     i++;
+    if (input[i] == '"')
+        i++;
     j = 0;
     while (input[i] && (input[i] == '_' || ft_isalnum(input[i])))
     {
-        var_name[j] = input[i];
-        //printf("Character -> %c\n", var_name[j]);
-        i++;
-        j++;
+        var_name[j++] = input[i++];
     }
     var_name[j] = '\0';
-    printf("Var Name -> %s\n", var_name);
     return (var_name);
 }
+
 
 char *find_var_in_env(char *input, char *var_name, char **env) // looks through the env to find the var value
 {
@@ -89,16 +121,17 @@ char *find_var_in_env(char *input, char *var_name, char **env) // looks through 
     char *var_value;
 
     i = 0;
+    var_value = NULL;
     while (env[i])
     {
-        if (ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0)
+        if (ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0 &&
+            env[i][ft_strlen(var_name)] == '=')
         {
             var_value = ft_strdup(env[i] + ft_strlen(var_name) + 1);
             return (var_value);
         }
         i++;
     }
-    free(var_value);
     delete_name_and_dollar_sign(input, var_name);
     return (NULL);
 }

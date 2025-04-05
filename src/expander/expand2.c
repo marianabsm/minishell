@@ -6,18 +6,18 @@
 /*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/05 21:36:15 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/04/05 22:11:15 by mabrito-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// $USER -> expande (mabrito-)
-// "$USER" -> expande (mabrito-)
+// $USER -> expande (mabrito-) ✅
+// "$USER" -> expande (mabrito-) ✅
 
-// '$USER' -> $USER
+// '$USER' -> $USER (esta a printar mabrito-)
 
-// $'USER' -> USER
+// $'USER' -> USER (nao esta a apagar o dollar sign nem as pelicas)
 // $"USER" -> USER
 
 int should_expand(char *input) // receives a pointer to the part of the input string where either ' , " or $ was found
@@ -30,13 +30,12 @@ int should_expand(char *input) // receives a pointer to the part of the input st
         return (1);
     if (input[0] == '$' && input[1] == '\'')
         return (0);
-    if (input[0] == '$' && input[1] == '"')
+    if (input[0] == '$' && input[1] == '"') // Handle $"USER"
         return (1);
     if (input[0] == '$')
         return (1);
     return (0);
 }
-
 
 char *delete_name_and_dollar_sign (char *input, char *var_name)
 {
@@ -84,26 +83,44 @@ char *expand_var(char *input)
     int var_size;
 
     new_input = ft_strdup("");
+    if (!new_input)
+        return (NULL);
+
     i = 0;
     while (input[i])
     {
         if (input[i] == '$' && should_expand(&input[i]))
         {
+            if (input[i + 1] == '"')
+                i++;
             var_size = find_and_size_var_name(&input[i]);
+            if (var_size <= 0)
+                return (new_input);
             var_name = find_var_name2(&input[i], var_size);
+            if (!var_name)
+                return (new_input);
             var_value = find_var_in_env(input, var_name, msh()->env);
             if (var_value)
             {
+                temp = ft_strjoin(new_input, var_value);
                 free(new_input);
                 new_input = temp;
                 free(var_value);
             }
+            else
+            {
+                temp = ft_strjoin(new_input, "");
+                free(new_input);
+                new_input = temp;
+            }
             free(var_name);
-            i += var_size + 1; // Skip the variable name and '$'
+            i += var_size + 1;
+            if (input[i] == '"')
+                i++;
         }
         else
         {
-            temp = ft_strjoin_char(new_input, input[i]); // Append the current character
+            temp = ft_strjoin_char(new_input, input[i]);
             free(new_input);
             new_input = temp;
             i++;

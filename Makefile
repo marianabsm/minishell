@@ -23,6 +23,7 @@ SRC =			src/main/main.c \
 				src/parser/syntax.c \
 				src/parser/tokenizer.c \
 				src/parser/rm_quotes1.c \
+				src/expander/expand.c \
 				src/expander/expander_1.c \
                 src/expander/expander_2.c \
                 src/expander/expander_3.c \
@@ -56,6 +57,7 @@ SRC =			src/main/main.c \
 				src/utils/libft_utils3.c \
 				src/utils/libft_utils4.c \
 				src/utils/libft_utils5.c \
+				src/utils/libft_utils6.c \
 				src/utils/malloc.c \
 				src/utils/syntax_errors.c \
 				src/utils/utils_builtins.c \

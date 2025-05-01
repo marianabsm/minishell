@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   doc_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:29:52 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 15:38:08 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:01:28 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-
-int	doc_loop(char **args, t_exec *exec, int ex_index) // rever :  doc pipe checex_index
+int	doc_loop(char **args, t_exec *exec, int ex_index)
+		// rever :  doc pipe checex_index
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (args[i] != NULL)
@@ -33,7 +32,6 @@ int	doc_loop(char **args, t_exec *exec, int ex_index) // rever :  doc pipe chece
 		safe_close(exec[ex_index].pipe_fd[0]);
 	return (0);
 }
-
 
 int	open_infile_loop(char **in_redirs, t_exec *exec, int k)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   retokenizer_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 04:46:51 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 16:54:57 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:02:09 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_token	*get_operator(t_token *t)
 	t_token	*remain;
 
 	temp = ft_substr(t->content, 0, ft_isoperator(t->content, 0));
-	//printf("get_op = %s\n", temp);
+	// printf("get_op = %s\n", temp);
 	op = init_token(temp);
 	free(temp);
 	temp = ft_substr(t->content, ft_isoperator(t->content, 0),
 			ft_strlen(t->content));
-	//printf("get_remain = %s\n", temp);
+	// printf("get_remain = %s\n", temp);
 	remain = init_token(temp);
 	free(temp);
 	remain->prev = op;
@@ -53,11 +53,11 @@ t_token	*get_word(t_token *t)
 				i) == 0))
 		i++;
 	temp = ft_substr(t->content, 0, i);
-	//printf("get_op = %s\n", temp);
+	// printf("get_op = %s\n", temp);
 	word = init_token(temp);
 	free(temp);
 	temp = ft_substr(t->content, i, ft_strlen(t->content));
-	//printf("get_remain = %s\n", temp);
+	// printf("get_remain = %s\n", temp);
 	remain = init_token(temp);
 	free(temp);
 	word->next = remain;
@@ -72,20 +72,20 @@ int	needs_retoken(char *cmd)
 	bool	word;
 
 	i = -1;
-	operator = false;
+	operator= false;
 	word = false;
 	if (!cmd)
-		return 0;
+		return (0);
 	while (cmd && cmd[++i])
 	{
 		if (ft_isoperator(cmd, i) && !in_quotes(cmd, i))
-			operator = true;
+			operator= true;
 		else
 			word = true;
 	}
 	if (ft_strlen(cmd) > ft_isoperator(cmd, 0) && operator)
 		return (1);
-	else if (operator && word)
+	else if (operator&& word)
 		return (1);
 	return (0);
 }
@@ -102,14 +102,13 @@ t_token	*get_which(t_token *old)
 	return (new);
 }
 
-t_token *update_token(t_token *old)
+t_token	*update_token(t_token *old)
 {
 	t_token	*new;
 
-
 	new = get_which(old);
 	new->next->next = old->next;
-	if(old->prev != NULL)
+	if (old->prev != NULL)
 		old->prev->next = new;
 	new->prev = old->prev;
 	if (old->next)

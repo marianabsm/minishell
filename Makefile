@@ -63,7 +63,6 @@ SRC =			src/main/main.c \
 				src/utils/syntax_errors.c \
 				src/utils/utils_builtins.c \
 				src/utils/utils_str.c \
-				src/utils/delete.c \
 				testers.c
 
 CFLAGS =		-I./includes -g #-Wall -Wextra -Werror #-fsanitize=address

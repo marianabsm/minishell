@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sys_call_error_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:42:43 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 13:34:50 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:00:59 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char *get_path(t_env *env)
+char	*get_path(t_env *env)
 {
 	while (env)
 	{
@@ -23,20 +23,23 @@ char *get_path(t_env *env)
 	return (NULL);
 }
 
-char *path_search(char *str, t_env *env)
+char	*path_search(char *str, t_env *env)
 {
-	int i = 0;
-	char *tmp;
-	char *path = get_path(env);
+	int		i;
+	char	*tmp;
+	char	*path;
+	char	**ret;
 
+	i = 0;
+	path = get_path(env);
 	tmp = NULL;
 	if (!path)
 		return (ft_strdup(str));
-	char **ret = ft_split(path, ':');
-	while(ret && ret[i])
+	ret = ft_split(path, ':');
+	while (ret && ret[i])
 	{
 		if (ft_check_access(ft_strjoin(ret[i], "/"), str, &tmp))
-			break;
+			break ;
 		i++;
 	}
 	free_matrix(ret);

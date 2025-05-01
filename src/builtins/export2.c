@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:47:08 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 21:26:03 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 15:00:37 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	print_sorted_env(t_env *env, int fd)
 	int		env_size;
 	int		i;
 	int		j;
-	
+
 	temp_env = get_matrix_env(env);
 	env_size = 0;
 	while (temp_env[env_size])
@@ -97,23 +97,24 @@ void	print_sorted_env(t_env *env, int fd)
 void	export_command(char **args, t_env *env, int fd)
 {
 	int	i;
+
 	i = 1;
 	if (!args[1])
 		print_sorted_env(env, fd);
 	else
 	{
 		while (args[i])
-	{
-		if (!parse_export(args[i]))
 		{
-			ft_put_str_fd("export: '", fd);
-			ft_put_str_fd(args[i], fd);
-			ft_put_str_fd("': not a valid identifier\n", fd);
+			if (!parse_export(args[i]))
+			{
+				ft_put_str_fd("export: '", fd);
+				ft_put_str_fd(args[i], fd);
+				ft_put_str_fd("': not a valid identifier\n", fd);
+			}
+			else
+				var_add_back(env, create_var(args[i]));
+			i++;
 		}
-		else
-			var_add_back(env, create_var(args[i]));
-		i++;
-	}
 	}
 }
 

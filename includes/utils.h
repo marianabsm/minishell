@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:56 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/04 15:50:53 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 14:53:37 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ char	*ft_strdup(const char *s);
 int     is_special_char(char c);
 
 /* src/utils/delete.c */
-void	print_struct(t_token **lst_head);
-void    print_exec(t_exec *exec);
 char	**copy_matrix(char **src);
 
 

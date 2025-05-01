@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:31:05 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/20 21:41:35 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 15:00:17 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,3 @@ void	set_or_add_env_value(char **env, const char *key, const char *value)
 	else
 		env = expand_env(env, new_entry);
 }
-
-t_env	*env_cmd(t_env *env, int action);

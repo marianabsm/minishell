@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:16:49 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/31 16:18:02 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 15:02:34 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sigint_handler(int sig)
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_redisplay();
 	msh()->exit_status = 130;
 }

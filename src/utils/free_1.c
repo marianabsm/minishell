@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:17:41 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/04 15:50:36 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 15:02:39 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_tokens(t_token *tokens)
 	temp = tokens;
 	while (current)
 	{
-
 		temp = current->next;
 		if (current)
 		{

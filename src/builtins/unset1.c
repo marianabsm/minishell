@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 19:41:04 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/04 16:11:46 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 15:00:41 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 // 	env = msh()->env;
 // 	while(env)
-// 	{	
+// 	{
 // 		if(!ft_strcmp(name, env->var_name))
 // 			return(1);
 // 		env = env->next;
@@ -38,7 +38,7 @@
 //         free(env->var_name);
 //         free(env->var_value);
 //         free(env);
-//         return;
+//         return ;
 //     }
 //     while (env && env->next)
 //     {
@@ -49,7 +49,7 @@
 //             free(temp->var_name);
 //             free(temp->var_value);
 //             free(temp);
-//             return;
+//             return ;
 //         }
 //         env = env->next;
 //     }

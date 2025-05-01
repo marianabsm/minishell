@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 14:50:45 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/30 22:14:33 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/01 15:03:03 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	if (!s)
-		return NULL;
+		return (NULL);
 	n = ft_strlen((char *)s);
 	copy = (char *)safe_malloc(sizeof(char) * (n + 1));
 	if (!copy)
@@ -92,7 +92,7 @@ char	*ft_strdup(const char *s)
 	return (copy);
 }
 
-int is_special_char(char c) 
+int	is_special_char(char c)
 {
-    return (c == '<' || c == '>' || c == '|');
+	return (c == '<' || c == '>' || c == '|');
 }

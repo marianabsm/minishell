@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils6.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcapa-pe <gcapa-pe@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:28:30 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/16 11:38:55 by gcapa-pe         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:32:04 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcapa-pe <gcapa-pe@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/05 22:10:51 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:29:57 by gcapa-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char *find_var_in_env(char *input, char *var_name, char **env) // looks through 
 
     i = 0;
     var_value = NULL;
+    printf("var_name: %s\n", var_name);
     while (env[i])
     {
         if (ft_strncmp(env[i], var_name, ft_strlen(var_name)) == 0 &&

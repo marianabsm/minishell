@@ -2,5 +2,6 @@
     "files.associations": {
         "sstream": "c",
         "minishell.h": "c"
-    }
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/g++"
 }

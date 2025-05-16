@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: gcapa-pe <gcapa-pe@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:56 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/01 14:53:37 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/16 11:40:11 by gcapa-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int	ft_counter(char const *str, char c);
 char	**ft_split(char const *str, char c);
 int	ft_intmin(char *str);
 size_t	ft_digits(int n);
+
+/* src/utils/libft_utils6.c */
+char	*ft_strtrim(char *s, char c);
 
 /* src/utils/malloc.c */
 void	*ft_memset(void *s, int c, size_t n);

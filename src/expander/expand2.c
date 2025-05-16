@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcapa-pe <gcapa-pe@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/05 22:11:15 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:18:22 by gcapa-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,30 @@ char *ft_strjoin_char(char *s1, char c)
     return (result);
 }
 
+char * weird_cases(char *input)
+{   
+    if(input[0] == '\'' && input[ft_strlen(input) - 1] == '\'')
+        return (ft_strtrim(input, 39));
+    if (input[0] == '$' && input[1] == '\'')
+    {   
+        if (input[ft_strlen(input) - 1] == '\'')
+        {
+            // Remove the $ and the surrounding single quotes
+            return(ft_strtrim(ft_strtrim(input,'$'), 39)); 
+        }
+    }
+    if (input[0] == '$' && input[1] == '"')
+    {   
+
+        if (input[ft_strlen(input) - 1] == '"')
+        {
+            // Remove the $ and the surrounding double quotes
+            return(ft_strtrim(ft_strtrim(input, '$'), '"'));
+        }
+    }
+    return NULL;
+}
+
 char *expand_var(char *input)
 {
     char *var_name;
@@ -82,13 +106,19 @@ char *expand_var(char *input)
     int i;
     int var_size;
 
+    if((input[0] == '$' && input[1] == '\'') || (input[0] == '$' && input[1] == '"')
+    || (input[0] == '\'' && input[ft_strlen(input) - 1] == '\''))
+    {
+       return (weird_cases(input));
+    }
     new_input = ft_strdup("");
     if (!new_input)
         return (NULL);
-
     i = 0;
+    if(input[i] == '"')
+        i++;
     while (input[i])
-    {
+    {   
         if (input[i] == '$' && should_expand(&input[i]))
         {
             if (input[i + 1] == '"')

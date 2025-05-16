@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: gcapa-pe <gcapa-pe@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/15 14:40:01 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/16 11:23:27 by gcapa-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ int	parser(void)
 
     token_count = 0;
 
-    if (check_syntax_general(msh()->line))
+    if (check_syntax_general(msh()->line)) 
     {
-        new_line = add_spaces(msh()->line);
+        new_line = add_spaces(msh()->line); // Add spaces around tokens
         if (!new_line)
             return (0);
 
@@ -164,7 +164,7 @@ int	parser(void)
             return (0);
 
         // Parse tokens into commands and redirections
-        while (split_line[token_count])
+        while (split_line[token_count]) // token count increments when there is a token
         {
             // Parse redirections for the current command
             parse_redirections(split_line + token_count, &redirs_list);

@@ -3,7 +3,6 @@ CC = cc
 SANITIZE			=	-fsanitize=address
 
 SRC =			src/main/main.c \
-				src/parser/create_tokens.c \
 				src/parser/env.c \
 				src/parser/envp_1.c \
 				src/parser/envp_2.c \
@@ -11,23 +10,13 @@ SRC =			src/main/main.c \
 				src/parser/init_exec.c \
 				src/parser/init.c \
 				src/parser/parser.c \
-				src/parser/quotes.c \
-				src/parser/retokenizer_1.c \
-				src/parser/retokenizer_2.c \
 				src/parser/spaces.c \
-				src/parser/split_spaces.c \
 				src/parser/splitter.c \
 				src/parser/matrix.c \
 				src/parser/parse_command1.c \
 				src/parser/parse_command2.c \
-				src/parser/syntax.c \
-				src/parser/tokenizer.c \
-				src/parser/rm_quotes1.c \
 				src/expander/expand1.c \
 				src/expander/expand2.c \
-				src/expander/expander_1.c \
-                src/expander/expander_2.c \
-                src/expander/expander_3.c \
 				src/signals/signals_1.c \
 				src/signals/signals_2.c \
 				src/executor/fork_and_execute1.c \
@@ -63,7 +52,17 @@ SRC =			src/main/main.c \
 				src/utils/syntax_errors.c \
 				src/utils/utils_builtins.c \
 				src/utils/utils_str.c \
-				testers.c
+				#src/expander/expander_1.c \
+                src/expander/expander_2.c \
+				src/parser/retokenizer_1.c \
+				src/parser/retokenizer_2.c \
+				src/parser/tokenizer.c \
+				src/parser/create_tokens.c \
+				src/parser/quotes.c \
+				src/parser/rm_quotes1.c \
+				src/parser/split_spaces.c \
+				src/parser/syntax.c \
+                src/expander/expander_3.c \#
 
 CFLAGS =		-I./includes -g #-Wall -Wextra -Werror #-fsanitize=address
 OTHERFLAGS =	-lreadline #-lasan -O3

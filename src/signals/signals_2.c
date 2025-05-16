@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:02:43 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/01 15:02:36 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/03/22 14:27:41 by msilva-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handle_signaled(int status)
 	msh()->exit_status = 128 + WTERMSIG(status);
 }
 
-void	ft_waitpid(int pid)
+void ft_waitpid(int pid)
 {
 	int	status;
 

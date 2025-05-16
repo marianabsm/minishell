@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
+/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:38:25 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/01 15:02:42 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/03/22 13:06:27 by msilva-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	free_and_exit(t_msh *m)
 {
-	int	i;
-
 	if (!m)
 		return ;
 	clear_history();
@@ -31,7 +29,8 @@ void	free_and_exit(t_msh *m)
 		free_tokens(m->tokens);
 	if (m->exec)
 	{
-		i = 0;
+		int i = 0;
+
 		while (i < m->exec->nbr_cmds)
 			free_exec(&m->exec[i++]);
 		free(m->exec);

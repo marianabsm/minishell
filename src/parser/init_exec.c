@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:08:55 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/01 15:01:55 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/04/02 12:02:52 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	count_cmds(t_token *tokens)
 {
-	int	nbr_cmds;
-
+	int nbr_cmds;
 	nbr_cmds = 1;
 	if (!tokens)
 		return (-1);
@@ -30,23 +29,20 @@ int	count_cmds(t_token *tokens)
 
 int	strlen_args(char **args)
 {
-	int	i;
-
-	i = 0;
+	int i = 0;
 	if (args)
 	{
 		while (args[i])
 			i++;
 	}
-	return (i);
+	return i;
 }
 
-char	**add_to_matrix(char *content, char **args)
+char **add_to_matrix(char *content, char **args)
 {
-	int		i;
-	int		new_i;
-	char	**new;
-
+	int i;
+	int new_i;
+	char **new;
 	i = 0;
 	new_i = -1;
 	if (!args)
@@ -57,7 +53,7 @@ char	**add_to_matrix(char *content, char **args)
 	}
 	else
 	{
-		i = strlen_args(args) + 1;                   //+1 is for the new str
+		i = strlen_args(args) + 1; //+1 is for the new str
 		new = safe_malloc(sizeof(char *) * (i + 1)); //+1 is for null
 		while (args[++new_i])
 			new[new_i] = ft_strdup(args[new_i]);
@@ -68,9 +64,9 @@ char	**add_to_matrix(char *content, char **args)
 	return (new);
 }
 
-void	tokens_to_exec(t_token *token, t_exec *exec, int nbr_cmds)
+void tokens_to_exec(t_token *token, t_exec *exec, int nbr_cmds)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (token)
@@ -78,7 +74,7 @@ void	tokens_to_exec(t_token *token, t_exec *exec, int nbr_cmds)
 		exec[i].index = i;
 		exec[i].nbr_cmds = nbr_cmds;
 		if (token->type != PIPE)
-			exec[i].args = add_to_matrix(token->content, exec[i].args);
+				exec[i].args = add_to_matrix(token->content, exec[i].args);
 		if (token->type == CMD)
 			token = token->next;
 		else if (token->type == PIPE)
@@ -91,10 +87,11 @@ void	tokens_to_exec(t_token *token, t_exec *exec, int nbr_cmds)
 	}
 }
 
-t_exec	*init_exec(t_token *tokens)
+
+t_exec *init_exec(t_token *tokens)
 {
 	t_exec	*exec;
-	int		nbr_cmds;
+	int nbr_cmds;
 
 	if (!tokens)
 		return (NULL);
@@ -104,10 +101,11 @@ t_exec	*init_exec(t_token *tokens)
 	return (exec);
 }
 
+
 /* rever */
 int	set_exec(void)
 {
-	t_token	*tokens;
+	t_token *tokens;
 
 	tokens = msh()->tokens;
 	msh()->exec = init_exec(tokens);

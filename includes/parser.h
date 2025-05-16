@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/04 15:51:06 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/15 15:01:02 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define PARSER_H
 
 # include "../includes/minishell.h"
-
-/* create_token.c */
-int					get_type(char *str);
-void				token_add_back(t_token *head, t_token *new);
-t_token				*init_token(char *str);
-t_token				*create_tokens(char **temp);
 
 /* envp_1.c */
 int					dup_var(t_env *start, t_env *new);
@@ -49,40 +43,6 @@ t_msh				*init_all(char **envp);
 /* parser.c */
 int					parser(void);
 void				print_msh(t_msh *msh);
-
-/* quotes.c */
-int					in_quotes(char *line, int max);
-int					in_singles(char *line, int max);
-int					check_quotes(char *line);
-int					skip_quotes(char *str, int i);
-
-/* retokenizer.c */
-t_token				*get_operator(t_token *t);
-t_token				*get_word(t_token *t);
-int					needs_retoken(char *cmd);
-t_token				*get_which(t_token *old);
-t_token				*update_token(t_token *old);
-void				re_token(t_token *head);
-
-/* split_spaces.c */
-int					count_words(char *line);
-int					parser_wdlen(char *line, int i);
-char				**split_spaces(char *line);
-
-/* syntax.c */
-int					syntax_red(t_token *token);
-int					syntax_pipe(t_token *token);
-int					error_redir(t_token *token);
-int					error_pipe(void);
-int					check_syntax(t_token *token);
-
-/* tokenizer.c */
-int					tokenizer(void);
-
-/* rm_quotes1.c */
-char				*rm_quote(char *str);
-void				rm_quotes_exec(void);
-int					rm_strlen(char *str);
 
 /* spaces */
 void				double_quoted_string(const char *input, char *output,
@@ -126,12 +86,6 @@ static int			count_args_for_command(char **tokens, int token_count,
 /* parse_command 2 */
 void				parse_redirections(char **tokens,t_redirs_list **redirs_list);
 void				free_redirs_list(t_redirs_list *head);
-
-/* testers */
-void 				print_simple_command(t_simple_command *simple_command);
-void				print_redirs(t_redirs_list *redirs);
-void 				print_command_table(t_command_table *command_table);
-void 				free_command_table(t_command_table *command_table);
 
 /* env */
 char **duplicate_envp(char **envp);

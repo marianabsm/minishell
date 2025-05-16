@@ -1,31 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   libft_utils6.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/16 20:59:01 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/01 15:02:27 by marianamest      ###   ########.fr       */
+/*   Created: 2025/04/04 18:28:30 by marianamest       #+#    #+#             */
+/*   Updated: 2025/04/04 18:29:12 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// dar set para null de todas as vars do msh()
-int	tokenizer(void)
-{
-	// char	**matrix;
-	printf("%s\n", msh()->line);
-	// mete espacos
-	printf("%s\n", msh()->line);
-	// matrix = split_spaces(msh()->line);
-	// if (!matrix)
-	//	return (0);
-	// msh()->tokens = create_tokens(matrix);
-	// if (!msh()->tokens)
-	//	return (0);
-	// free_matrix(matrix);
-	// re_token(msh()->tokens);
-	return (1);
-}

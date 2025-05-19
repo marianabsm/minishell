@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/16 13:30:32 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/16 14:38:34 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,6 @@
 // Se nao estiver no env apago o dollar sign e o nome ✅
 // Sempre que tem um $ tenta expandir a menos que esteja entre pelicas especificamente (aspas expande) ✅ 
 
-// int find_and_size_var_name(char *input) // finds var name in the input string
-// {
-//     int i;
-//     int j;
-    
-//     i = 0;
-//     if(!input)
-//         return (0);
-//     while(input[i])
-//     {
-//         if (input[i] == '$')
-//         {
-//             j = i; // guarda o index do $ para depois apagar
-//             i++;
-//             if(ft_isdigit(input[i])) // se o primeiro char for numero
-//             {
-//                 delete_number_and_dollar_sign(input, j);
-//                 return(0);
-//             }
-//             else if(!ft_isalnum(input[i])) // se o primeiro char nao for valido
-//             {
-//                 delete_dollar_sign(input, j);
-//                 return(0);
-//             }
-//             while(input[i] && (input[i] == '_' || ft_isalnum(input[i]))) //size of var name
-//                 i++;
-//             break;
-//         }
-//         i++;
-//     }
-//     return (i - j - 1);
-// }
 
 int find_and_size_var_name(char *input) // finds var name in the input string
 {

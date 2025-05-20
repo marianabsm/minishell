@@ -6,19 +6,12 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/16 13:30:35 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:09:33 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// $USER -> expande (mabrito-) ✅
-// "$USER" -> expande (mabrito-) ✅
-
-// '$USER' -> $USER (esta a printar mabrito-)
-
-// $'USER' -> USER (nao esta a apagar o dollar sign nem as pelicas)
-// $"USER" -> USER
 
 int should_expand(char *input) // receives a pointer to the part of the input string where either ' , " or $ was found
 {

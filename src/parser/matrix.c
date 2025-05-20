@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 18:13:34 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/03 14:17:41 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 13:55:35 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,6 @@ void assign(const char *content, t_token *new_token)
     else
         new_token->type = CMD;
 }
-
-// void assign(const char *content, t_token *new_token, t_redirs_list *red_list)
-// {
-//     if (ft_strcmp(content, "|") == 0)
-//         new_token->type = PIPE;
-//     else if (ft_strcmp(content, ">") == 0)
-//         new_token->type = R_OUT;
-//     else if (ft_strcmp(content, ">>") == 0)
-//         new_token->type = R_APP;
-//     else if (ft_strcmp(content, "<") == 0)
-//         new_token->type = R_IN;
-//     else if (ft_strcmp(content, "<<") == 0)
-//         new_token->type = HERE_DOC;
-//     else
-//         new_token->type = CMD;
-//     // if(new_token->type != CMD)
-//     //     set_redir(new_token->content, red_list, new_token->type, new_token);
-// }
 
 t_token *create_token(const char *content, int index)
 {

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   doc_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:29:52 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 15:38:08 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:11:10 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-
 
 int	doc_loop(char **args, t_exec *exec, int ex_index) // rever :  doc pipe checex_index
 {

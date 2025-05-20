@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:36:18 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/21 23:54:30 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:02:49 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ char **exred(char **args, int i)
 	}
 	return (new);
 }
-
-//ezequiel original
 
 int exec_r(t_exec *ex, char *value)
 {

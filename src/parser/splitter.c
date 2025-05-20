@@ -6,14 +6,11 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:12:58 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/31 19:30:29 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 13:57:36 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-// #include <unistd.h>
-// #include <stdio.h>
-
 
 int count_words2(const char *str)
 {
@@ -120,25 +117,3 @@ char **split_by_spaces(const char *input)
     matrix[k] = NULL;
     return (matrix);
 }
-
-// int main(void)
-// {
-//     const char *test_input;
-//     char **result;
-//     int i; 
-//     test_input = "This is a \"'\"test string\"'\" 'for split_by_spaces.'";
-//     result = split_by_spaces(test_input);
-//     if (!result) 
-//     {
-//         printf("Error: split_by_spaces returned NULL.\n");
-//         return (1);
-//     }
-//     printf("Words in the input string:\n");
-//     for (i = 0; result[i] != NULL; i++) 
-//     {
-//         printf("Word %d: %s\n", i + 1, result[i]);
-//         free(result[i]);
-//     }
-//     free(result);
-//     return (0);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sys_call_error_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:42:43 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 13:34:50 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:06:26 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

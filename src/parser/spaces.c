@@ -136,14 +136,3 @@ char *add_spaces(const char *input)
     free(output);
     return (NULL);
 }
-        
-    
-
-// int main() 
-// {
-//     const char *input = "a<b| 'bligghg<<blo blu hh'    \"c>>d\" <<e>f";
-//     char *output = add_spaces(input);
-//     printf("Output: %s\n", output);
-//     free(output);
-//     return 0;
-// }

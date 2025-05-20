@@ -6,15 +6,11 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 01:33:41 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/30 22:21:05 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 13:55:16 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/* rever este handle de erros line 85 se **env vier vazio no início 
-do programa -> assumir que o env começa vazio-> MAS tem de ter 
-a t_env **env inicializada para poder fazer o export à mesma */
 
 char	**get_default_env(void)
 {
@@ -56,7 +52,6 @@ t_env	*empty_env(void)
 	return (start);
 }
 
-// rever não serve para nada
 t_env	*env_dup(t_env *env)
 {
 	t_env	*new;

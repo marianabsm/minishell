@@ -6,23 +6,11 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:42:49 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/16 14:38:34 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:09:03 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-
-// So deixo de ler o nome da var quando encontro um char illegal para nome de var (o nome não pode começar por numero) ✅
-// A partir desse momento paro e o que li ate aí é o nome da var ✅
-// Procuro nas env vars ✅
-// Se estiver la passo o nome para o valor ✅
-// Se o primeiro char for invalido char para var name apago o dollar sign ✅
-// Se o primeiro char for numero apago dollar sign e número ✅
-
-// Se nao estiver no env apago o dollar sign e o nome ✅
-// Sempre que tem um $ tenta expandir a menos que esteja entre pelicas especificamente (aspas expande) ✅ 
-
 
 int find_and_size_var_name(char *input) // finds var name in the input string
 {

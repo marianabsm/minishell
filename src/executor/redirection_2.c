@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:36:18 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/03/22 10:11:44 by msilva-c         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:05:05 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

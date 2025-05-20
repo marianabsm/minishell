@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:59:04 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/15 15:01:02 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:15:09 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,22 @@
 
 # include "../includes/minishell.h"
 
-/* envp_1.c */
+/* env */
+char				**duplicate_envp(char **envp);
+void				free_env(char **env);
+
+/* envp_1 */
 int					dup_var(t_env *start, t_env *new);
 void				var_add_back(t_env *start, t_env *new);
 t_env				*create_var(char *str);
 int					check_env(char **envp);
-t_env				*get_env(char **envp);
 
-/* envp_2.c */
+/* envp_2 */
 char				**get_default_env(void);
 t_env				*empty_env(void);
-t_env				*_dup(t_env *env);
+t_env				*env_dup(t_env *env);
 
-/* init_exec.c */
+/* init_exec */
 int					count_cmds(t_token *tokens);
 int					strlen_args(char **args);
 char				**add_to_matrix(char *content, char **args);
@@ -42,6 +45,7 @@ t_msh				*init_all(char **envp);
 
 /* parser.c */
 int					parser(void);
+void				set_in_and_out(t_command_table *cmd_table);
 void				print_msh(t_msh *msh);
 
 /* spaces */
@@ -62,7 +66,6 @@ char				**split_by_spaces(const char *input);
 
 /* matrix */
 void				assign(const char *content, t_token *new_token);
-// void assign(const char *content, t_token *new_token, t_redirs_list *red_list);
 t_token				*create_token(const char *content, int index);
 void				add_token_to_list(t_token **head, t_token *new_token);
 t_token				*matrix_to_tokens(char **matrix);
@@ -84,11 +87,8 @@ static int			count_args_for_command(char **tokens, int token_count,
 						int *token_index);
 
 /* parse_command 2 */
-void				parse_redirections(char **tokens,t_redirs_list **redirs_list);
+void				parse_redirections(char **tokens,
+						t_redirs_list **redirs_list);
 void				free_redirs_list(t_redirs_list *head);
-
-/* env */
-char **duplicate_envp(char **envp);
-void free_env(char **env);
 
 #endif

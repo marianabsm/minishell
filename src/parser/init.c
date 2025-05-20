@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:18:18 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/04 16:09:52 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/19 15:56:03 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_msh	*msh(void)
 t_msh	*init_all(char **envp) // aqui
 {
 	msh()->line = NULL;
+	msh()->cmd_table = NULL;
 	msh()->tokens = NULL;
 	// get_env(envp);
 	msh()->env = duplicate_envp(envp);

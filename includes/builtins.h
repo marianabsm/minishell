@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:01:00 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/04/04 16:14:28 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 13:51:17 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define BUILTINS_H
 
 # include "../includes/minishell.h"
-
-// char	*path_search(char *str, t_env *env);
 
 /* cd */
 void	cd(char **args, int fd);

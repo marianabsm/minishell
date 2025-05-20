@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:03:37 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/03 17:03:31 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:45:54 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ t_simple_command *init_simple_command(void)
     simple_command = (t_simple_command *)malloc(sizeof(t_simple_command));
     if (!simple_command)
         return (NULL);
+    simple_command->name = NULL;
+    simple_command->path = NULL;
     simple_command->n_of_arg = 0;
     simple_command->array_args = NULL;
+    simple_command->input_fd = STDIN_FILENO;
+    simple_command->output_fd = STDOUT_FILENO;
     return (simple_command);
 }
 

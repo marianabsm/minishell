@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msilva-c <msilva-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 00:04:58 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/22 15:47:32 by msilva-c         ###   ########.fr       */
+/*   Created: 2025/03/12 00:04:58 by  marianamest       #+#    #+#             */
+/*   Updated: 2025/05/20 14:10:41 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 
 # include "../includes/minishell.h"
 
-char	**ft_split(char const *str, char c);
-size_t	ft_strlcat(char *dst, const char *src, size_t n);
-
-
-/* prep_redir.c */
-int     prep_in_redir(t_exec *exec);
+/* doc_loop.c */ 
 int     doc_loop(char **in_redirs, t_exec *exec, int k);
 int     open_infile_loop(char **in_redirs, t_exec *exec, int k);
 int     is_final_heredoc(char **in_redirs, t_exec *exec, int k);

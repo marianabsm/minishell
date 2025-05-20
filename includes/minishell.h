@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:57:32 by marianamest       #+#    #+#             */
-/*   Updated: 2025/04/04 15:51:38 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:22:11 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,17 @@
 # define R_IN 5
 # define HERE_DOC 6
 
-// rever se ainda vai ser preciso dps da ft_dup_env - Environment variables
-
 typedef struct s_exec
 {
 	int		pid;
 	char 	**args;
-	int		nbr_cmds; //pipes
+	int		nbr_cmds;
 	int		pipe_fd[2];
 	int		pipe_doc[2];
 	int		in_fd;
 	int		out_fd;
 	bool	is_heredoc;
-	char	**envp; // manter a t_env e arranjar uma função
+	char	**envp;
 	bool	cmd_invalid;
 	int		index;
 }					t_exec;
@@ -65,19 +63,22 @@ typedef struct s_env
 
 typedef struct s_token
 {
-	char			*content; // a palavra ou simbolo
-	int				type; // pavra pipe ou redir
-	int				index; // o johny nao usou mas seria o index na matrix
-	struct s_token	*next; // o prox token
-	struct s_token	*prev; // johny nao usou mas self explanatory
+	char			*content;
+	int				type;
+	int				index;
+	struct s_token	*next;
+	struct s_token	*prev;
 }					t_token;
 
-/////////////////////////////////////// from here ///////////////////////////////////////
 
 typedef struct s_simple_command
 {
 	int 			n_of_arg;
+	char			*name;
+	char			*path;
 	char			**array_args;
+	int 			input_fd;
+	int 			output_fd;
 }					t_simple_command;
 
 typedef struct s_redirs_list
@@ -92,23 +93,21 @@ typedef struct s_redirs_list
 
 typedef struct s_command_table
 {
-	int					shellvl; // rever : a ver com johny
+	int					shellvl;
 	t_simple_command	*simplecommand;
 	t_redirs_list		*redirs;
 	struct s_command_table *next;
 }					t_command_table;
-
-//////////////////////////////////////// to here ////////////////////////////////////////
 
 typedef struct s_msh
 {
 	char			*line;
 	char			*home;
 	char			*pwd;
-	//t_env			*env;
-	char			**env; // aqui
+	char			**env;
 	t_token			*tokens;
 	t_exec			*exec;
+	t_command_table	*cmd_table;
 	int				exit_status;
 	bool			signaled;
 }					t_msh;
@@ -120,7 +119,6 @@ typedef enum e_temp_op
 	TEMP_IN = -3,
 	TEMP_OUT = -4,
 }					t_temp_op;
-
 
 # include "builtins.h"
 # include "executor.h"

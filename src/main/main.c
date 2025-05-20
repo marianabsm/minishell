@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:19:12 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/19 17:13:04 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 15:40:36 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,11 @@ void	msh_loop(char **envp)
 			ft_put_str_fd("exit\n", 2);
 			break ;
 		}
-		//if (msh()->line && *msh()->line)
-		//{
 		add_history(msh()->line);
-		//parser();
 			if (parser())
 				start_executing(msh()->cmd_table);
 			else
 				msh()->exit_status = 2;
-		//}
 		prep_next_cmdline(msh());
 	}
 	free_and_exit(msh());

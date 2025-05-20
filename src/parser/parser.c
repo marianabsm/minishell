@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/20 13:57:14 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 15:33:27 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,128 @@ void set_in_and_out(t_command_table *cmd_table)
     }
 }
 
+// int	parser(void)
+// {
+//     char                *new_line;
+//     char                **split_line;
+//     int                 token_count;
+//     t_command_table     *command_table = NULL;
+//     t_command_table     *current_table = NULL;
+//     t_redirs_list       *redirs_list = NULL;
+
+//     token_count = 0;
+//     if (check_syntax_general(msh()->line)) 
+//     {
+//         new_line = add_spaces(msh()->line);
+//         if (!new_line)
+//             return (0);
+//         split_line = split_by_spaces(new_line);
+//         if (!split_line)
+//             return (0);
+//         while (split_line[token_count])
+//         {
+//             parse_redirections(split_line + token_count, &redirs_list);
+//             t_command_table *new_table = init_cmd_table(0, NULL, NULL);
+//             if (!new_table)
+//             {
+//                 ft_put_str_fd("Error: Failed to initialize command table.\n", STDERR_FILENO);
+//                 free_redirs_list(redirs_list);
+//                 return (0);
+//             }
+//             new_table->redirs = redirs_list;
+//             redirs_list = NULL;
+//             t_simple_command *simple_command = init_simple_command();
+//             if (!simple_command)
+//             {
+//                 ft_put_str_fd("Error: Failed to initialize simple command.\n", STDERR_FILENO);
+//                 free_redirs_list(new_table->redirs);
+//                 free(new_table);
+//                 return (0);
+//             }
+//             int start_token = token_count;
+//             int arg_count = 0;
+//             while (split_line[token_count] && strcmp(split_line[token_count], "|") != 0)
+//             {
+//                 if (strcmp(split_line[token_count], "<") == 0 ||
+//                     strcmp(split_line[token_count], ">") == 0 ||
+//                     strcmp(split_line[token_count], "<<") == 0 ||
+//                     strcmp(split_line[token_count], ">>") == 0)
+//                 {
+//                     token_count += 2;
+//                 }
+//                 else
+//                 {
+//                     arg_count++;
+//                     token_count++;
+//                 }
+//             }
+//             simple_command->array_args = malloc((arg_count + 1) * sizeof(char *));
+//             if (!simple_command->array_args)
+//             {
+//                 ft_put_str_fd("Error: Memory allocation failed for arguments.\n", STDERR_FILENO);
+//                 free_redirs_list(new_table->redirs);
+//                 free(new_table);
+//                 free(simple_command);
+//                 return (0);
+//             }
+//             int arg_index = 0;
+//             for (int i = start_token; i < token_count; i++)
+//             {
+//                 if (strcmp(split_line[i], "<") == 0 ||
+//                     strcmp(split_line[i], ">") == 0 ||
+//                     strcmp(split_line[i], "<<") == 0 ||
+//                     strcmp(split_line[i], ">>") == 0)
+//                 {
+//                     i++;
+//                 }
+//                 else
+//                     simple_command->array_args[arg_index++] = ft_strdup(split_line[i]);
+//             }
+//             simple_command->array_args[arg_index] = NULL; // Null-terminate the array
+//             simple_command->n_of_arg = arg_count;
+//             simple_command->name = ft_strdup(simple_command->array_args[0]); // First argument is the command name
+//             new_table->simplecommand = simple_command;
+//             if (!command_table)
+//                 command_table = new_table;
+//             else
+//                 current_table->next = new_table;
+//             current_table = new_table;
+//             if (split_line[token_count] && strcmp(split_line[token_count], "|") == 0)
+//                 token_count++;
+//         }
+//         t_command_table *tmp = command_table;
+//         msh()->cmd_table = command_table;
+//         set_in_and_out(msh()->cmd_table);
+//     }
+//     return (1);
+// }
+
+int ft_compare(char **a, int n)
+{
+    if (ft_strcmp(a[n], "<") == 0 ||
+                    ft_strcmp(a[n], ">") == 0 ||
+                    ft_strcmp(a[n], "<<") == 0 ||
+                    ft_strcmp(a[n], ">>") == 0)
+        return (1);
+    return(0);
+}
+
 int	parser(void)
 {
     char                *new_line;
     char                **split_line;
     int                 token_count;
-    t_command_table     *command_table = NULL;
-    t_command_table     *current_table = NULL;
-    t_redirs_list       *redirs_list = NULL;
-
+    t_simple_command    *simple_command;
+    t_command_table     *command_table;
+    t_command_table     *current_table;
+    t_redirs_list       *redirs_list;
+    int start_token;
+    int arg_count;
+    
+    command_table = NULL;
+    current_table = NULL;
+    redirs_list = NULL;
+    arg_count = 0;
     token_count = 0;
     if (check_syntax_general(msh()->line)) 
     {
@@ -119,7 +232,7 @@ int	parser(void)
             }
             new_table->redirs = redirs_list;
             redirs_list = NULL;
-            t_simple_command *simple_command = init_simple_command();
+            simple_command = init_simple_command();
             if (!simple_command)
             {
                 ft_put_str_fd("Error: Failed to initialize simple command.\n", STDERR_FILENO);
@@ -127,17 +240,11 @@ int	parser(void)
                 free(new_table);
                 return (0);
             }
-            int start_token = token_count;
-            int arg_count = 0;
-            while (split_line[token_count] && strcmp(split_line[token_count], "|") != 0)
+            start_token = token_count;
+            while (split_line[token_count] && ft_strcmp(split_line[token_count], "|") != 0)
             {
-                if (strcmp(split_line[token_count], "<") == 0 ||
-                    strcmp(split_line[token_count], ">") == 0 ||
-                    strcmp(split_line[token_count], "<<") == 0 ||
-                    strcmp(split_line[token_count], ">>") == 0)
-                {
+                if (ft_compare(split_line, token_count))
                     token_count += 2;
-                }
                 else
                 {
                     arg_count++;
@@ -154,17 +261,14 @@ int	parser(void)
                 return (0);
             }
             int arg_index = 0;
-            for (int i = start_token; i < token_count; i++)
+            int i = start_token;
+            while (i < token_count)
             {
-                if (strcmp(split_line[i], "<") == 0 ||
-                    strcmp(split_line[i], ">") == 0 ||
-                    strcmp(split_line[i], "<<") == 0 ||
-                    strcmp(split_line[i], ">>") == 0)
-                {
+                if (ft_compare(split_line, i))
                     i++;
-                }
                 else
                     simple_command->array_args[arg_index++] = ft_strdup(split_line[i]);
+                i++;
             }
             simple_command->array_args[arg_index] = NULL; // Null-terminate the array
             simple_command->n_of_arg = arg_count;
@@ -175,7 +279,7 @@ int	parser(void)
             else
                 current_table->next = new_table;
             current_table = new_table;
-            if (split_line[token_count] && strcmp(split_line[token_count], "|") == 0)
+            if (split_line[token_count] && ft_strcmp(split_line[token_count], "|") == 0)
                 token_count++;
         }
         t_command_table *tmp = command_table;

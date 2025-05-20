@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:12:36 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/20 14:01:21 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 15:36:50 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,10 @@ int execute_command(t_simple_command *cmd, char **env)
          close(cmd->output_fd);
          cmd->output_fd = STDOUT_FILENO;
      }
-     printf("Executing command: %s\n", cmd->name);
-    printf("Input FD: %d, Output FD: %d\n", cmd->input_fd, cmd->output_fd);
     return (WEXITSTATUS(status));
 }
 
-void handle_pipes_and_redirections(t_simple_command *cmd) // A substituir com os actual commands
+void handle_pipes_and_redirections(t_simple_command *cmd)
 {   
     
     if (cmd->input_fd != STDIN_FILENO)

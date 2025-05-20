@@ -22,7 +22,6 @@ SRC =			src/main/main.c \
 				src/executor/redirection_1.c \
 				src/executor/redirection_2.c \
 				src/executor/start_executer_1.c \
-				src/executor/start_executer_2.c \
 				src/executor/sys_call_error_1.c \
 				src/executor/sys_call_error_2.c \
 				src/executor/new_exec.c \

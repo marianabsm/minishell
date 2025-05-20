@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 22:12:58 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/20 13:57:36 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/20 15:36:38 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ char **split_by_spaces(const char *input)
     if (!input) 
         return NULL;
     word_count = count_words2(input);
-    printf("%d\n", word_count);
     matrix = (char **)malloc((word_count + 1) * sizeof(char *));
     if (!matrix)
         return NULL;

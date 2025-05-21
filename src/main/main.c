@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:19:12 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/21 13:31:25 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 14:11:07 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,31 @@
 
 void	prep_next_cmdline(t_msh *m)
 {
-	int	i;
-
-	if (!m)
-		return ;
-	if (m->line)
-	{
-		free(m->line);
-		m->line = NULL;
-	}
-	if (m->tokens)
-	{
-		free_tokens(m->tokens);
-		m->tokens = NULL;
-	}
-	if (m->exec)
-	{
-		i = 0;
-		while (i < m->exec->nbr_cmds)
-			free_exec(&m->exec[i++]);
-		m->exec = NULL;
-	}
+    int i;
+	
+    if (!m)
+        return;
+    if (m->line)
+    {
+        free(m->line);
+        m->line = NULL;
+    }
+    if (m->tokens)
+    {
+        free_tokens(m->tokens);
+        m->tokens = NULL;
+    }
+    if (m->exec)
+    {
+        i = 0;
+        while (i < m->exec->nbr_cmds)
+        {
+            free_exec(&m->exec[i]);
+            i++;
+        }
+        free(m->exec);
+        m->exec = NULL;
+    }
 }
 
 void	msh_loop(char **envp)
@@ -53,7 +57,14 @@ void	msh_loop(char **envp)
 		if(msh()->line)
 			add_history(msh()->line);
 		if (parser())
+		{
+			if(!set_exec())
+			{
+				ft_put_str_fd("Error: Failed to initialize exec\n", 2);
+				continue;
+			}
 			start_executing(msh()->exec, msh()->cmd_table);
+		}
 		else
 		{
 			msh()->exit_status = 2;

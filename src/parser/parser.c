@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 06:32:58 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/21 13:05:21 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 14:15:29 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,6 @@ static int process_command(char **split_line, int *token_count, t_command_table 
 
     return (1);
 }
-
 int parser(void)
 {
     char *new_line;
@@ -244,21 +243,31 @@ int parser(void)
     token_count = 0;
     command_table = NULL;
     current_table = NULL;
+
     if (!check_syntax_general(msh()->line))
         return (0);
+
     new_line = add_spaces(msh()->line);
     if (!new_line)
         return (0);
+
     split_line = split_by_spaces(new_line);
     if (!split_line)
         return (0);
+    msh()->tokens = matrix_to_tokens(split_line);
+    if (!msh()->tokens)
+    {
+        fprintf(stderr, "Error: Tokens not initialized in parser\n");
+        return (0);
+    }
+
     while (split_line[token_count])
     {
         if (!process_command(split_line, &token_count, &command_table, &current_table))
             return (0);
     }
+
     msh()->cmd_table = command_table;
     set_in_and_out(msh()->cmd_table);
     return (1);
 }
-

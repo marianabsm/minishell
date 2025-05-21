@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:12:36 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/21 13:39:42 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 14:15:07 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ int execute_command(t_simple_command *cmd, char **env)
 
 void handle_pipes_and_redirections(t_exec *exec)
 {
+    if (!exec)
+    {
+        ft_put_str_fd("Error: exec is NULL in handle_pipes_and_redirections\n", 2);
+        return;
+    }
     if (exec->in_fd != STDIN_FILENO)
     {
         dup2(exec->in_fd, STDIN_FILENO);
@@ -98,10 +103,13 @@ void handle_pipes_and_redirections(t_exec *exec)
         dup2(exec->pipe_fd[0], STDIN_FILENO);
         close(exec->pipe_fd[0]);
     }
-}
-
-int start_executing(t_exec *exec, t_command_table *cmd_table)
+}int start_executing(t_exec *exec, t_command_table *cmd_table)
 {
+    if (!exec)
+    {
+        fprintf(stderr, "Error: exec is NULL in start_executing\n");
+        return (-1);
+    }
     t_command_table *current_cmd = cmd_table;
     int status;
 
@@ -134,7 +142,6 @@ int start_executing(t_exec *exec, t_command_table *cmd_table)
             return (-1);
         }
 
-        // Close pipe ends after use
         if (exec->pipe_fd[0] != -1) close(exec->pipe_fd[0]);
         if (exec->pipe_fd[1] != -1) close(exec->pipe_fd[1]);
 

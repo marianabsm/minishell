@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabrito- <mabrito-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:20:57 by marianamest       #+#    #+#             */
-/*   Updated: 2025/03/27 16:40:27 by mabrito-         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:15:12 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	run_doc(char *delimiter, t_exec *exec, int k)
 	if (!delimiter || *delimiter == '\0')
 {
     ft_put_str_fd("Error: Invalid heredoc delimiter\n", STDERR_FILENO);
-    fprintf(stderr, "Debug: delimiter is '%s'\n", delimiter ? delimiter : "(null)");
     return (-1);
 }
 	pid = fork();

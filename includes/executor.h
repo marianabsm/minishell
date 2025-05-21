@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 19:58:02 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/20 14:08:34 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 13:30:48 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 int is_builtin(char *command);
 int find_path(t_simple_command *cmd);
 int execute_command(t_simple_command *cmd, char **env);
-void handle_pipes_and_redirections(t_simple_command *cmd);
-int start_executing(t_command_table *cmd_table);
+void handle_pipes_and_redirections(t_exec *exec);
+int start_executing(t_exec *exec, t_command_table *cmd_table);
 
 /* redirection_1 */
 int exec_r(t_exec *ex, char *value);

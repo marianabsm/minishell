@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:12:36 by marianamest       #+#    #+#             */
-/*   Updated: 2025/05/20 15:36:50 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 13:39:42 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int is_builtin(char *command)
 {
-    // Check if the command is a built-in command
     if (strcmp(command, "cd") == 0 || strcmp(command, "echo") == 0 ||
         strcmp(command, "exit") == 0 || strcmp(command, "export") == 0 ||
         strcmp(command, "unset") == 0 || strcmp(command, "env") == 0)
@@ -35,9 +34,7 @@ int find_path(t_simple_command *cmd)
     for (i = 0; paths[i]; i++)
     {
         full_path = ft_strjoin(paths[i], "/");
-        //printf("full_path: %s\n", full_path);
         full_path = ft_strjoin(full_path, cmd->name);
-        //printf("full_path2: %s\n", full_path);
         if (access(full_path, X_OK) == 0)
         {
             cmd->path = full_path;
@@ -46,7 +43,6 @@ int find_path(t_simple_command *cmd)
         }
         free(full_path);
     }
-
     free_matrix(paths);
     return (-1);
 }
@@ -80,35 +76,70 @@ int execute_command(t_simple_command *cmd, char **env)
     return (WEXITSTATUS(status));
 }
 
-void handle_pipes_and_redirections(t_simple_command *cmd)
-{   
-    
-    if (cmd->input_fd != STDIN_FILENO)
-    {   
-       
-        dup2(cmd->input_fd, STDIN_FILENO);
-        close(cmd->input_fd);
+void handle_pipes_and_redirections(t_exec *exec)
+{
+    if (exec->in_fd != STDIN_FILENO)
+    {
+        dup2(exec->in_fd, STDIN_FILENO);
+        close(exec->in_fd);
     }
-    if (cmd->output_fd != STDOUT_FILENO)
-    {   
-        
-        dup2(cmd->output_fd, STDOUT_FILENO);
-        close(cmd->output_fd);
-    } 
+    if (exec->out_fd != STDOUT_FILENO)
+    {
+        dup2(exec->out_fd, STDOUT_FILENO);
+        close(exec->out_fd);
+    }
+    if (exec->pipe_fd[1] != -1)
+    {
+        dup2(exec->pipe_fd[1], STDOUT_FILENO);
+        close(exec->pipe_fd[1]);
+    }
+    if (exec->pipe_fd[0] != -1)
+    {
+        dup2(exec->pipe_fd[0], STDIN_FILENO);
+        close(exec->pipe_fd[0]);
+    }
 }
 
-int start_executing(t_command_table *cmd_table)
+int start_executing(t_exec *exec, t_command_table *cmd_table)
 {
     t_command_table *current_cmd = cmd_table;
     int status;
+
     while (current_cmd)
     {
-        handle_pipes_and_redirections(current_cmd->simplecommand);
+        if (!current_cmd || !current_cmd->simplecommand)
+        {
+            fprintf(stderr, "Error: Null pointer in command table\n");
+            return (-1);
+        }
+
+        if (current_cmd->next)
+        {
+            if (pipe(exec->pipe_fd) < 0)
+            {
+                perror("pipe failed");
+                return (-1);
+            }
+            current_cmd->simplecommand->output_fd = exec->pipe_fd[1];
+            current_cmd->next->simplecommand->input_fd = exec->pipe_fd[0];
+        }
+
+        handle_pipes_and_redirections(exec);
+
         status = execute_command(current_cmd->simplecommand, msh()->env);
         if (status == -1)
+        {
+            if (exec->pipe_fd[0] != -1) close(exec->pipe_fd[0]);
+            if (exec->pipe_fd[1] != -1) close(exec->pipe_fd[1]);
             return (-1);
+        }
+
+        // Close pipe ends after use
+        if (exec->pipe_fd[0] != -1) close(exec->pipe_fd[0]);
+        if (exec->pipe_fd[1] != -1) close(exec->pipe_fd[1]);
+
         current_cmd = current_cmd->next;
     }
-    
+
     return (0);
 }

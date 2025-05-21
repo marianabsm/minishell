@@ -51,6 +51,7 @@ SRC =			src/main/main.c \
 				src/utils/syntax_errors.c \
 				src/utils/utils_builtins.c \
 				src/utils/utils_str.c \
+				testers_for_printing.c\
 
 CFLAGS =		-I./includes -g #-Wall -Wextra -Werror #-fsanitize=address
 OTHERFLAGS =	-lreadline #-lasan -O3
@@ -62,7 +63,7 @@ OBJS =			$(patsubst src/%.c, $(OBJ_DIR)%.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(OTHERFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LINKS) $(OTHERFLAGS) -o $(NAME)
 
 sanitize: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(OTHERFLAGS) $(SANITIZE) -o $(NAME)
@@ -83,3 +84,5 @@ re: fclean all
 
 valgrind:
 	valgrind --suppressions=readline.supp --track-fds=all --leak-check=full --show-leak-kinds=all --track-origins=yes  ./minishell
+
+

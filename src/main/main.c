@@ -6,7 +6,7 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:19:12 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/20 15:40:36 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 13:31:25 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	prep_next_cmdline(t_msh *m)
 
 void	msh_loop(char **envp)
 {
+	int original_stdin = dup(STDIN_FILENO);
+    int original_stdout = dup(STDOUT_FILENO);
 	init_all(envp);
 	while (1)
 	{
@@ -48,13 +50,21 @@ void	msh_loop(char **envp)
 			ft_put_str_fd("exit\n", 2);
 			break ;
 		}
-		add_history(msh()->line);
-			if (parser())
-				start_executing(msh()->cmd_table);
-			else
-				msh()->exit_status = 2;
+		if(msh()->line)
+			add_history(msh()->line);
+		if (parser())
+			start_executing(msh()->exec, msh()->cmd_table);
+		else
+		{
+			msh()->exit_status = 2;
+			free(msh()->line);
+		}
+		dup2(original_stdin, STDIN_FILENO);
+        dup2(original_stdout, STDOUT_FILENO);
 		prep_next_cmdline(msh());
 	}
+	close(original_stdin);
+    close(original_stdout);
 	free_and_exit(msh());
 }
 

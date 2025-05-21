@@ -6,12 +6,11 @@
 /*   By: marianamestre <marianamestre@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:59:02 by msilva-c          #+#    #+#             */
-/*   Updated: 2025/05/20 13:52:09 by marianamest      ###   ########.fr       */
+/*   Updated: 2025/05/21 13:06:55 by marianamest      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 void	close_args_fds(t_exec *ex)
 {

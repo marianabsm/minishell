@@ -30,6 +30,7 @@
 # include <unistd.h>
 # include <stddef.h>
 
+# define NO_TYPE 0 
 # define CMD 1
 # define PIPE 2
 # define R_OUT 3
@@ -37,18 +38,19 @@
 # define R_IN 5
 # define HERE_DOC 6
 
+# define PIPE_SYNT_ERR "minishell : syntax error near unexpected token `|'\n"
+# define APP_SYNT_ERR "minishell : syntax error near unexpected token `>>'\n"
+# define IN_SYNT_ERR "minishell : syntax error near unexpected token `>'\n"
+# define OUT_SYNT_ERR "minishell : syntax error near unexpected token `<'\n"
+# define HEREDOC_SYNT_ERR "minishell : syntax error near unexpected token `<<'\n"
+
 typedef struct s_exec
 {
-	int		pid;
-	char 	**args;
+	int		*pid;
 	int		nbr_cmds;
-	int		pipe_fd[2];
+	int		in_pipe_fd[2];
+	int		out_pipe_fd[2];
 	int		pipe_doc[2];
-	int		in_fd;
-	int		out_fd;
-	bool	is_heredoc;
-	char	**envp;
-	bool	cmd_invalid;
 	int		index;
 }					t_exec;
 
@@ -93,7 +95,6 @@ typedef struct s_redirs_list
 
 typedef struct s_command_table
 {
-	int					shellvl;
 	t_simple_command	*simplecommand;
 	t_redirs_list		*redirs;
 	struct s_command_table *next;
@@ -111,14 +112,6 @@ typedef struct s_msh
 	int				exit_status;
 	bool			signaled;
 }					t_msh;
-
-typedef enum e_temp_op
-{
-	TEMP_DOLLAR = -1,
-	TEMP_PIPE = -2,
-	TEMP_IN = -3,
-	TEMP_OUT = -4,
-}					t_temp_op;
 
 # include "builtins.h"
 # include "executor.h"

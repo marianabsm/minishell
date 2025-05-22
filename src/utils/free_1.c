@@ -66,6 +66,7 @@ void	free_matrix(char **matrix)
 
 void free_command_table(t_command_table *cmd_table)
 {
+	t_redirs_list	*tmp_redir;
 	t_command_table	*temp;
 
 	if (!cmd_table)
@@ -73,15 +74,32 @@ void free_command_table(t_command_table *cmd_table)
 	while (cmd_table)
 	{
 		temp = cmd_table->next;
+		if (cmd_table->simplecommand->input_fd > 0)
+		{
+			printf("Closed infile %d\n", cmd_table->simplecommand->input_fd);
+			close(cmd_table->simplecommand->input_fd);
+			cmd_table->simplecommand->input_fd = 0;
+		}
+		if (cmd_table->simplecommand->output_fd > 1)
+		{
+			printf("Closed outfile %d\n", cmd_table->simplecommand->output_fd);
+			close(cmd_table->simplecommand->output_fd);
+			cmd_table->simplecommand->output_fd = 1;
+		}
+		while (cmd_table->redirs)
+		{
+			tmp_redir = cmd_table->redirs->next;
+			if (cmd_table->redirs->delimiter)
+				free(cmd_table->redirs->delimiter);
+			if (cmd_table->redirs->file)
+				free(cmd_table->redirs->file);
+			free(cmd_table->redirs);
+			cmd_table->redirs = tmp_redir;
+		}
+		free_matrix(cmd_table->simplecommand->array_args);
+		free(cmd_table->simplecommand);
 		free(cmd_table);
 		cmd_table = temp;
 	}
 }
 
-void	free_exec(t_exec *ex)
-{
-	if (ex->args)
-		free_matrix(ex->envp);
-	if (ex->envp)
-		free_matrix(ex->envp);
-}

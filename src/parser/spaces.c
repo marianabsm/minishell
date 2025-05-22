@@ -108,7 +108,7 @@ int check_open_double_quotes(const char *str)
     return (double_quote_open == 0);
 }
 
-char *add_spaces(const char *input)
+char *add_spaces(char *input)
 {
     char *output;
     int i;

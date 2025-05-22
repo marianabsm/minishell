@@ -21,12 +21,12 @@ int	run_doc(char *delimiter, t_exec *exec, int k)
 		return(-1);
 	// if(!delimiter || *delimiter == '\0') // problem
 	// {
-	// 	ft_put_str_fd("Error: Invalid heredoc delimiter\n", STDERR_FILENO);
+	// 	ft_putstr_fd("Error: Invalid heredoc delimiter\n", STDERR_FILENO);
 	// 	return (-1);
 	// }
 	if (!delimiter || *delimiter == '\0')
 {
-    ft_put_str_fd("Error: Invalid heredoc delimiter\n", STDERR_FILENO);
+    ft_putstr_fd("Error: Invalid heredoc delimiter\n", STDERR_FILENO);
     return (-1);
 }
 	pid = fork();

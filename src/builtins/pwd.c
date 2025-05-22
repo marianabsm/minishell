@@ -19,7 +19,7 @@ void	pwd(int fd)
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL && *cwd)
 	{
-		ft_put_str_fd(cwd, fd);
+		ft_putstr_fd(cwd, fd);
 		write(fd, "\n", 1);
 		msh()->exit_status = 0;
 	}

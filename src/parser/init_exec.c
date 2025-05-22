@@ -12,19 +12,19 @@
 
 #include "../includes/minishell.h"
 
-int	count_cmds(t_token *tokens)
+int	count_cmds(void)
 {
-	int nbr_cmds;
+    t_command_table *tmp;
+	int             nbr_cmds;
+
+    tmp = msh()->cmd_table;
 	nbr_cmds = 0;
-	if (!tokens)
-		return (0);
-	while (tokens)
+	while (tmp)
 	{
-		if (tokens->type == PIPE)
-			nbr_cmds++;
-		tokens = tokens->next;
+		nbr_cmds++;
+		tmp = tmp->next;
 	}
-	return (nbr_cmds + 1);
+	return (nbr_cmds);
 }
 
 int	strlen_args(char **args)
@@ -53,90 +53,38 @@ char **add_to_matrix(char *content, char **args)
     free(args); // Free the old matrix
     return (new);
 }
-// char **add_to_matrix(char *content, char **args)
-// {
-// 	int i;
-// 	int new_i;
-// 	char **new;
-// 	i = 0;
-// 	new_i = -1;
-// 	if (!args)
-// 	{
-// 		new = safe_malloc(sizeof(char *) * 2);
-// 		new[0] = ft_strdup(content);
-// 		new[1] = NULL;
-// 	}
-// 	else
-// 	{
-// 		i = strlen_args(args) + 1; //+1 is for the new str
-// 		new = safe_malloc(sizeof(char *) * (i + 1)); //+1 is for null
-// 		while (args[++new_i])
-// 			new[new_i] = ft_strdup(args[new_i]);
-// 		new[new_i] = ft_strdup(content);
-// 		new[++new_i] = NULL;
-// 	}
-// 	free_matrix(args);
-// 	return (new);
-// }
 
-void tokens_to_exec(t_token *token, t_exec *exec, int nbr_cmds)
-{
-    int i = 0;
-
-    while (token)
-    {
-        exec[i].index = i;
-        exec[i].nbr_cmds = nbr_cmds;
-        exec[i].args = NULL; // Initialize args to NULL
-
-        if (token->type != PIPE)
-            exec[i].args = add_to_matrix(token->content, exec[i].args);
-
-        if (token->type == PIPE)
-            i++;
-
-        token = token->next;
-    }
-}
-
-t_exec *init_exec(t_token *tokens)
+t_exec *init_exec(void)
 {
     t_exec *exec;
-    int nbr_cmds;
 
-    if (!tokens)
-    {
-        fprintf(stderr, "Error: tokens is NULL in init_exec\n");
-        return (NULL);
-    }
-
-    nbr_cmds = count_cmds(tokens);
-    exec = (t_exec *)malloc(sizeof(t_exec) * (nbr_cmds + 1));
+    exec = (t_exec *)malloc(sizeof(t_exec));
     if (!exec)
     {
-        fprintf(stderr, "Error: Memory allocation failed in init_exec\n");
+        ft_putstr_fd("Error: Memory allocation failed in init_exec\n", STDERR_FILENO);
         return (NULL);
     }
-
-    tokens_to_exec(tokens, exec, nbr_cmds);
+    exec->nbr_cmds = count_cmds();
+    exec->pid = malloc(sizeof(pid_t) * exec->nbr_cmds);
+    if (!exec->pid)
+    {
+        ft_putstr_fd("Error: Memory allocation failed in init_exec\n", STDERR_FILENO);
+        return (NULL);
+    }
+    exec->index = 0;
+    exec->out_pipe_fd[0] = -1;
+    exec->out_pipe_fd[1] = -1;
+    exec->in_pipe_fd[0] = -1;
+    exec->in_pipe_fd[1] = -1;
     return (exec);
 }
 
-
 int set_exec(void)
 {
-    t_token *tokens = msh()->tokens;
-
-    if (!tokens)
-    {
-        fprintf(stderr, "Error: msh()->tokens is NULL in set_exec\n");
-        return (0);
-    }
-
-    msh()->exec = init_exec(tokens);
+    msh()->exec = init_exec();
     if (!msh()->exec)
     {
-        fprintf(stderr, "Error: init_exec failed in set_exec\n");
+        ft_putstr_fd("Error: init_exec failed in set_exec\n", STDERR_FILENO);
         return (0);
     }
     return (1);

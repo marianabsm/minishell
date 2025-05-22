@@ -19,7 +19,6 @@
 void	free_var(t_env *var);
 void	free_matrix(char **matrix);
 void	free_tokens(t_token *tokens);
-void	free_exec(t_exec *ex);
 void	free_command_table(t_command_table *cmd_table);
 
 /* free_2 */
@@ -51,7 +50,6 @@ int		ft_isquote(char c);
 
 /* libft_utils4 */
 char	**copy_matrix(char **src);
-void	ft_put_str_fd(char *str, int fd);
 int		ft_atoi(char *str);
 char	*ft_strjoin(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t n);
@@ -88,7 +86,7 @@ void	print_struct(t_token **lst_head);
 void	print_exec(t_exec *exec);
 
 /* syntax_errors */
-int		check_syntax_general(char *str);
+int		check_syntax_general(t_token *tokens);
 int		check_syntax_redirs2(char *str);
 int		check_syntax_redirs1(char *str);
 int		check_syntax_pipes(char *str);

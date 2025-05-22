@@ -29,10 +29,7 @@ void	free_and_exit(t_msh *m)
 		free_tokens(m->tokens);
 	if (m->exec)
 	{
-		int i = 0;
-
-		while (i < m->exec->nbr_cmds)
-			free_exec(&m->exec[i++]);
+		free(m->exec->pid);
 		free(m->exec);
 	}
 }

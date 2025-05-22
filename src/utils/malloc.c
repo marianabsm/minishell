@@ -33,7 +33,7 @@ void	*safe_malloc(size_t size)
 	new = (void *)malloc(size);
 	if (!new)
 	{
-		ft_put_str_fd("Failed malloc\n", 2);
+		ft_putstr_fd("Failed malloc\n", STDERR_FILENO);
 		free_and_exit(msh());
 		exit(1);
 	}

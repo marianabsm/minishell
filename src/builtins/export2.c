@@ -106,9 +106,9 @@ void	export_command(char **args, t_env *env, int fd)
 	{
 		if (!parse_export(args[i]))
 		{
-			ft_put_str_fd("export: '", fd);
-			ft_put_str_fd(args[i], fd);
-			ft_put_str_fd("': not a valid identifier\n", fd);
+			ft_putstr_fd("export: '", fd);
+			ft_putstr_fd(args[i], fd);
+			ft_putstr_fd("': not a valid identifier\n", fd);
 		}
 		else
 			var_add_back(env, create_var(args[i]));

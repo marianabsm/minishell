@@ -79,13 +79,13 @@ bool	check_and_open_file(char *file_name)
 
 	if (file_name == NULL || *file_name == '\0')
 	{
-		ft_put_str_fd("Error: File name is empty\n", STDERR_FILENO);
+		ft_putstr_fd("Error: File name is empty\n", STDERR_FILENO);
 		return (false);
 	}
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_put_str_fd("Error opening file: %s\n", STDERR_FILENO);
+		ft_putstr_fd("Error opening file: %s\n", STDERR_FILENO);
 		return (false);
 	}
 	safe_close(fd);

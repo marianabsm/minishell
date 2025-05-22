@@ -91,7 +91,7 @@ static char *extract_next_token(const char *input, int *i)
     return result;
 }
 
-char **split_by_spaces(const char *input) 
+char **split_by_spaces(char *input) 
 {
     int word_count;
     char **matrix;
@@ -101,11 +101,11 @@ char **split_by_spaces(const char *input)
     i = 0;
     k = 0;
     if (!input) 
-        return NULL;
+        return (NULL);
     word_count = count_words2(input);
     matrix = (char **)malloc((word_count + 1) * sizeof(char *));
     if (!matrix)
-        return NULL;
+        return (free(input), NULL);
     while (input[i]) 
     {
         if (!ft_isspace(input[i]))
@@ -114,5 +114,6 @@ char **split_by_spaces(const char *input)
             i++;
     }
     matrix[k] = NULL;
+    free(input);
     return (matrix);
 }

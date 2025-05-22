@@ -28,14 +28,14 @@ void	prep_next_cmdline(t_msh *m)
         free_tokens(m->tokens);
         m->tokens = NULL;
     }
+	if (m->cmd_table)
+	{
+		free_command_table(m->cmd_table);
+		m->cmd_table = NULL;
+	}
     if (m->exec)
     {
-        i = 0;
-        while (i < m->exec->nbr_cmds)
-        {
-            free_exec(&m->exec[i]);
-            i++;
-        }
+        free(m->exec->pid);
         free(m->exec);
         m->exec = NULL;
     }
@@ -51,7 +51,7 @@ void	msh_loop(char **envp)
 		msh()->line = readline("minishell$");
 		if (!msh()->line)
 		{
-			ft_put_str_fd("exit\n", 2);
+			ft_putstr_fd("exit\n", STDERR_FILENO);
 			break ;
 		}
 		if(msh()->line)
@@ -60,7 +60,7 @@ void	msh_loop(char **envp)
 		{
 			if(!set_exec())
 			{
-				ft_put_str_fd("Error: Failed to initialize exec\n", 2);
+				ft_putstr_fd("Error: Failed to initialize exec\n", STDERR_FILENO);
 				continue;
 			}
 			start_executing(msh()->exec, msh()->cmd_table);
@@ -68,10 +68,9 @@ void	msh_loop(char **envp)
 		else
 		{
 			msh()->exit_status = 2;
-			free(msh()->line);
+			prep_next_cmdline(msh());
+			continue ;
 		}
-		dup2(original_stdin, STDIN_FILENO);
-        dup2(original_stdout, STDOUT_FILENO);
 		prep_next_cmdline(msh());
 	}
 	close(original_stdin);

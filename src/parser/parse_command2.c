@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void add_redir(t_redirs_list **head, t_redirs_list *new_node)
+void    add_redir(t_redirs_list **head, t_redirs_list *new_node)
 {
 	t_redirs_list *tmp = *head;
 	if (!tmp)
@@ -25,40 +25,22 @@ void add_redir(t_redirs_list **head, t_redirs_list *new_node)
 	tmp->next = new_node;
 }
 
-void parse_redirections(char **tokens, t_redirs_list **redirs_list)
+void    add_cmd_info(t_simple_command **cmd, t_token *token)
 {
-    int i = 0;
+    char    **cmd_arr;
+    int     i;
 
-    while (tokens[i])
-    {
-        if (ft_strcmp(tokens[i], ">") == 0)
-        {
-            add_redir(redirs_list, init_redirs_list(R_OUT, tokens[i + 1], NULL));
-            i++;
-        }
-        else if (ft_strcmp(tokens[i], ">>") == 0)
-        {
-            add_redir(redirs_list, init_redirs_list(R_APP, tokens[i + 1], NULL));
-            i++;
-        }
-        else if (ft_strcmp(tokens[i], "<") == 0)
-        {	
-
-            add_redir(redirs_list, init_redirs_list(R_IN, tokens[i + 1], NULL));
-            i++;
-        }
-        else if (ft_strcmp(tokens[i], "<<") == 0)
-        {
-            add_redir(redirs_list, init_redirs_list(HERE_DOC, NULL, tokens[i + 1]));
-            i++;
-        }
-        else if (ft_strcmp(tokens[i], "|") == 0)
-        {
-            add_redir(redirs_list, init_redirs_list(PIPE, NULL, NULL));
-        }
-        i++;
-    }
+    (*cmd)->n_of_arg++;
+    cmd_arr = malloc(sizeof(char *) * ((*cmd)->n_of_arg + 1));
+    i = -1;
+    while (++i < (*cmd)->n_of_arg - 1)
+        cmd_arr[i] = ft_strdup((*cmd)->array_args[i]);
+    cmd_arr[i] = ft_strdup(token->content);
+	cmd_arr[++i] = NULL;
+    free_matrix((*cmd)->array_args);
+    (*cmd)->array_args = cmd_arr;
 }
+
 void free_redirs_list(t_redirs_list *head)
 {
 	t_redirs_list *tmp;

@@ -1,0 +1,86 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcapa-pe <gcapa-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 18:36:18 by msilva-c          #+#    #+#             */
+/*   Updated: 2025/06/10 21:38:45 by gcapa-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/minishell.h"
+
+void	check_ls(t_simple_command *cmd)
+{
+	if (find_substring_index(cmd->array_args[0], "/bin/ls") == 0
+		&& cmd->array_args[1] == NULL)
+	{
+		ft_putstr_fd("minishell: ls: No such file or directory\n",
+			STDERR_FILENO);
+		msh()->exit_status = 2;
+		exit(2);
+	}
+}
+
+int	size_args(char **args)
+{
+	int	size;
+
+	size = 0;
+	if (!args || !args[0])
+		return (0);
+	while (args[size])
+		size++;
+	return (size);
+}
+
+char	**exred(char **args, int i)
+{
+	char	**new;
+	int		size;
+	int		j;
+	int		k;
+
+	size = size_args(args);
+	new = safe_malloc((size + 1) * sizeof(char *));
+	j = 0;
+	k = 0;
+	while (k < size && args[k])
+	{
+		if (k == i)
+			k += 2;
+		else
+			new[j++] = args[k++];
+	}
+	return (new);
+}
+
+int	exec_r(t_exec *ex, char *value)
+{
+	safe_close(ex->out_pipe_fd[1]);
+	ex->out_pipe_fd[1] = open(value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (ex->out_pipe_fd[1] < 0)
+		return (0);
+	if (dup2(ex->out_pipe_fd[1], STDOUT_FILENO) < 0)
+	{
+		perror("dup2 failed");
+		return (0);
+	}
+	return (1);
+}
+
+int	exec_rr(t_exec *ex, char *value)
+{
+	safe_close(ex->out_pipe_fd[1]);
+	ex->out_pipe_fd[1] = open(value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (ex->out_pipe_fd[1] < 0)
+		return (0);
+	if (dup2(ex->out_pipe_fd[1], STDOUT_FILENO) < 0)
+	{
+		perror("dup2 failed");
+		return (0);
+	}
+	return (1);
+}
